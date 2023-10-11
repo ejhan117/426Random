@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExpandPaddle : PowerUp
 {
     private float originalSize;
-    private float increasedSize = 3.0f; // or whatever value you want
+    private float increasedSize = 4.0f; // or whatever value you want
 
     public override void Activate(Player player)
     {

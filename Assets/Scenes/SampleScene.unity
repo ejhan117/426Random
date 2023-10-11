@@ -4947,6 +4947,14 @@ PrefabInstance:
       propertyPath: powerUp3StockText
       value: 
       objectReference: {fileID: 1236209969}
+    - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_Size.x
+      value: 0.48708725
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.25645638
+      objectReference: {fileID: 0}
     - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -5043,6 +5051,14 @@ PrefabInstance:
     - target: {fileID: 4507088299167641189, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_Name
       value: PlayerOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.498374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.250813
       objectReference: {fileID: 0}
     - target: {fileID: 7621390953062417108, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: scoreText
