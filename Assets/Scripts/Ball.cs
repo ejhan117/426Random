@@ -124,6 +124,7 @@ public class Ball : MonoBehaviour
         Debug.Log(rb.velocity);
         transform.position = Vector2.zero;
         speed = 9.0f;
+        normalSpeed = 9.0f;
         StartCoroutine(StartAfterDelay());
     }
 

@@ -5111,12 +5111,16 @@ PrefabInstance:
       objectReference: {fileID: 123051548}
     - target: {fileID: 3422833819063711551, guid: ad33f494f6a09514f9dceb8307012a7b, type: 3}
       propertyPath: speed
-      value: 7.5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3422833819063711551, guid: ad33f494f6a09514f9dceb8307012a7b, type: 3}
       propertyPath: scoreSound
       value: 
       objectReference: {fileID: 8300000, guid: e57c3f06c760953478b057ae06e70cac, type: 3}
+    - target: {fileID: 3422833819063711551, guid: ad33f494f6a09514f9dceb8307012a7b, type: 3}
+      propertyPath: normalSpeed
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3422833819063711551, guid: ad33f494f6a09514f9dceb8307012a7b, type: 3}
       propertyPath: scoreAudioSource
       value: 
