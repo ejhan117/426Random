@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float normalSpeed = 7.5f;
+    public float normalSpeed = 9.0f;
     public float speed = 9.0f;
     private Vector2 direction;
     private Rigidbody2D rb;
@@ -73,6 +73,8 @@ public class Ball : MonoBehaviour
         // If the ball hits a paddle, invert its x-direction
         if (col.gameObject.name == "PlayerOne" || col.gameObject.name == "PlayerTwo")
         {
+            speed += 0.5f;
+            normalSpeed += 0.5f;
             direction.x = -direction.x;
             rb.velocity = direction * speed;
             audioSource.Play();
@@ -121,7 +123,7 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector2.zero;
         Debug.Log(rb.velocity);
         transform.position = Vector2.zero;
-        speed = 7.5f;
+        speed = 9.0f;
         StartCoroutine(StartAfterDelay());
     }
 
