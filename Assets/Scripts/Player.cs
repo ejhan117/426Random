@@ -15,6 +15,7 @@ public class Player : Paddle
 
     public List<PowerUp> powerUpInventory = new List<PowerUp>();
 
+
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());

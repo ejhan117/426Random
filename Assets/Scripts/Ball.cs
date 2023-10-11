@@ -10,12 +10,18 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rb;
     public Player pOne;
     public Player pTwo;
+    private AudioSource audioSource;
+
+    public AudioSource scoreAudioSource;
+    public AudioClip scoreSound;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(StartAfterDelay());
+        audioSource = GetComponent<AudioSource>();
         GameObject pOneObject = GameObject.Find("PlayerOne");
         GameObject pTwoObject = GameObject.Find("PlayerTwo");
         pOne = pOneObject.GetComponent<Player>();
@@ -49,6 +55,7 @@ public class Ball : MonoBehaviour
         {
             direction.y = -direction.y;
             rb.velocity = direction * speed;
+            audioSource.Play();
         }
 
         // If the ball hits a paddle, invert its x-direction
@@ -56,17 +63,20 @@ public class Ball : MonoBehaviour
         {
             direction.x = -direction.x;
             rb.velocity = direction * speed;
+            audioSource.Play();
         }
 
         // If the ball hits the Left or Right Wall , reset ball and give point
         if (col.gameObject.name == "Left Wall")
         {
             pTwo.Score();
+            PLayScoreSound();   
             ResetBall();
         }
         else if(col.gameObject.name == "Right Wall")
         {
             pOne.Score();
+            PLayScoreSound();
             ResetBall();
         }
     }
@@ -84,5 +94,10 @@ public class Ball : MonoBehaviour
     void Update()
     {
         rb.velocity = direction * speed;
+    }
+
+    void PLayScoreSound() {
+        scoreAudioSource.PlayOneShot(scoreSound);
+    
     }
 }
