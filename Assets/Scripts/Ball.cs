@@ -7,7 +7,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public float normalSpeed = 7.5f;
-    public float speed = 7.5f;
+    public float speed = 9.0f;
     private Vector2 direction;
     private Rigidbody2D rb;
     public Player pOne;
@@ -92,6 +92,8 @@ public class Ball : MonoBehaviour
         if (col.gameObject.name == "Left Wall")
         {
             pTwo.Score();
+            pOne.AddPowerUp();
+            pOne.UpdatePowerUpUI();
             PLayScoreSound();
             if (!isClone)
             {
@@ -101,6 +103,8 @@ public class Ball : MonoBehaviour
         else if(col.gameObject.name == "Right Wall")
         {
             pOne.Score();
+            pTwo.AddPowerUp();
+            pTwo.UpdatePowerUpUI();
             PLayScoreSound();
             if (!isClone)
             {

@@ -171,25 +171,8 @@ public class Player : Paddle
         //TODO: Add the SplitBall Powerup
         while (true)
         {
-            yield return new WaitForSeconds(5f);
-            
-            //TODO: Change range to 0,3 once implemented splitball
-            int randomPowerUp = Random.Range(0, 3);
-            switch (randomPowerUp)
-            {
-                case 0:
-                    powerUpInventory.Add(new ExpandPaddle());
-                    powerUp1Stock++;
-                    break;
-                case 1:
-                    powerUpInventory.Add(new LightningBall());
-                    powerUp2Stock++;
-                    break;
-                case 2:
-                    powerUpInventory.Add(new SplitBall());
-                    powerUp3Stock++;
-                    break;
-            }
+            yield return new WaitForSeconds(10f);
+            AddPowerUp();
             UpdatePowerUpUI();
         }
     }
@@ -235,6 +218,28 @@ public class Player : Paddle
         // Update the UI for Power-Up 3
         powerUp3StockText.text = powerUp3Stock.ToString();
         powerUp3Image.color = (powerUp3Stock > 0) ? Color.green : Color.gray;
+    }
+
+    public void AddPowerUp()
+    {
+        //TODO: Change range to 0,3 once implemented splitball
+        Debug.Log("Adding powerup");
+        int randomPowerUp = Random.Range(0, 3);
+        switch (randomPowerUp)
+        {
+            case 0:
+                powerUpInventory.Add(new ExpandPaddle());
+                powerUp1Stock++;
+                break;
+            case 1:
+                powerUpInventory.Add(new LightningBall());
+                powerUp2Stock++;
+                break;
+            case 2:
+                powerUpInventory.Add(new SplitBall());
+                powerUp3Stock++;
+                break;
+        }
     }
 
 }
