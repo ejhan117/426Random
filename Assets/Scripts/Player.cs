@@ -4,18 +4,30 @@ using System.Xml;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Paddle
 {
     public enum PlayerNum { Player1, Player2 };
     public PlayerNum playerNum;
     public Vector2 direction { get; private set; }
-    private int score = 0;
+    public int score = 0;
     public TMP_Text scoreText;
 
     public List<PowerUp> powerUpInventory = new List<PowerUp>();
 
+    public Image powerUp1Image;
+    public TMP_Text powerUp1StockText;
+    public Image powerUp2Image;
+    public TMP_Text powerUp2StockText;
+    public Image powerUp3Image;
+    public TMP_Text powerUp3StockText;
 
+    private int powerUp1Stock = 0;
+    private int powerUp2Stock = 0;
+    private int powerUp3Stock = 0;
+
+    public bool readySplit = false;
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());
@@ -32,6 +44,7 @@ public class Player : Paddle
                 scoreText = textObject.GetComponent<TMP_Text>();
                 break;
         }
+        UpdatePowerUpUI();
     }
 
     private void Update()
@@ -51,7 +64,16 @@ public class Player : Paddle
                 {
                     direction = Vector2.zero;
                 }
+
+                // Controller joystick controls
+                float vertical = Input.GetAxis("Vertical");
+                if (Mathf.Abs(vertical) > 0.1f)  // Deadzone
+                {
+                    direction = new Vector2(0, vertical).normalized;
+                }
                 break;
+
+
             case PlayerNum.Player1:
                 if (Input.GetKey(KeyCode.W))
                 {
@@ -68,15 +90,54 @@ public class Player : Paddle
                 break;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if(playerNum == PlayerNum.Player1)
         {
-            ActivatePowerUpOfType<ExpandPaddle>();
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                ActivatePowerUpOfType<ExpandPaddle>();
+                if (powerUp1Stock > 0) powerUp1Stock--;
+                UpdatePowerUpUI();
+            }
+
+            // Activate the first "Faster Ball" power-up in the inventory when '2' is pressed
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                ActivatePowerUpOfType<LightningBall>();
+                if (powerUp2Stock > 0) powerUp2Stock--;
+                UpdatePowerUpUI();
+            }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                ActivatePowerUpOfType<SplitBall>();
+                if (powerUp3Stock > 0) powerUp3Stock--;
+                UpdatePowerUpUI();
+            }
         }
 
-        // Activate the first "Faster Ball" power-up in the inventory when '2' is pressed
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if(playerNum == PlayerNum.Player2)
         {
-            ActivatePowerUpOfType<LightningBall>();
+            if (Input.GetKeyDown(KeyCode.Comma) || Input.GetButtonDown("Fire1"))
+            {
+                ActivatePowerUpOfType<ExpandPaddle>();
+                if (powerUp1Stock > 0) powerUp1Stock--;
+                UpdatePowerUpUI();
+            }
+
+            // Activate the first "Faster Ball" power-up in the inventory when '2' is pressed
+            if (Input.GetKeyDown(KeyCode.Period) || Input.GetButtonDown("Fire2"))
+            {
+                ActivatePowerUpOfType<LightningBall>();
+                if (powerUp2Stock > 0) powerUp2Stock--;
+                UpdatePowerUpUI();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Slash) || Input.GetButtonDown("Fire3"))
+            {
+                ActivatePowerUpOfType<SplitBall>();
+                if (powerUp3Stock > 0) powerUp3Stock--;
+                UpdatePowerUpUI();
+            }
         }
     }
 
@@ -102,7 +163,7 @@ public class Player : Paddle
 
     private void UpdateScoreboard()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = score.ToString();
     }
 
     private IEnumerator GenerateRandomPowerUp()
@@ -113,19 +174,23 @@ public class Player : Paddle
             yield return new WaitForSeconds(5f);
             
             //TODO: Change range to 0,3 once implemented splitball
-            int randomPowerUp = Random.Range(0, 2);
+            int randomPowerUp = Random.Range(0, 3);
             switch (randomPowerUp)
             {
                 case 0:
                     powerUpInventory.Add(new ExpandPaddle());
+                    powerUp1Stock++;
                     break;
                 case 1:
                     powerUpInventory.Add(new LightningBall());
+                    powerUp2Stock++;
                     break;
-                    //case 2:
-                    //    powerUpInventory.Add(new FasterBallPowerUp());
-                    //    break;
+                case 2:
+                    powerUpInventory.Add(new SplitBall());
+                    powerUp3Stock++;
+                    break;
             }
+            UpdatePowerUpUI();
         }
     }
 
@@ -155,6 +220,21 @@ public class Player : Paddle
         {
             Debug.Log("No power-up of type " + typeof(T) + " found in inventory.");
         }
+    }
+
+    public void UpdatePowerUpUI()
+    {
+        // Update the UI for Power-Up 1
+        powerUp1StockText.text = powerUp1Stock.ToString();
+        powerUp1Image.color = (powerUp1Stock > 0) ? Color.green : Color.gray;
+
+        // Update the UI for Power-Up 2
+        powerUp2StockText.text = powerUp2Stock.ToString();
+        powerUp2Image.color = (powerUp2Stock > 0) ? Color.green : Color.gray;
+
+        // Update the UI for Power-Up 3
+        powerUp3StockText.text = powerUp3Stock.ToString();
+        powerUp3Image.color = (powerUp3Stock > 0) ? Color.green : Color.gray;
     }
 
 }

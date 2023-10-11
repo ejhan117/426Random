@@ -20,19 +20,40 @@ public class LightningBall : PowerUp
 
     public override void Activate(Player player)
     {
-        Ball ballInstance = GameObject.FindObjectOfType<Ball>();  // Find the Ball instance in the scene
-        if (ballInstance != null)
+        // Find all balls in the scene
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+
+        // Apply the speed power-up to each ball
+        foreach (GameObject ball in balls)
         {
-            ballInstance.speed *= speedMultiplier;
+            Ball ballScript = ball.GetComponent<Ball>();
+            if (ballScript != null)
+            {
+                ballScript.speed *= speedMultiplier;
+            }
+            ballScript.UpdateSpeed();
         }
+        //Ball ballInstance = GameObject.FindObjectOfType<Ball>();  // Find the Ball instance in the scene
+        //if (ballInstance != null)
+        //{
+        //    ballInstance.speed *= speedMultiplier;
+        //}
     }
 
     public override void Deactivate(Player player)
     {
-        Ball ballInstance = GameObject.FindObjectOfType<Ball>();  // Find the Ball instance in the scene
-        if (ballInstance != null)
+        // Find all balls in the scene
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+
+        // Apply the speed power-up to each ball
+        foreach (GameObject ball in balls)
         {
-            ballInstance.speed /= speedMultiplier;
+            Ball ballScript = ball.GetComponent<Ball>();
+            if (ballScript != null)
+            {
+                ballScript.speed /= speedMultiplier;
+            }
+            ballScript.UpdateSpeed();
         }
     }
 }
