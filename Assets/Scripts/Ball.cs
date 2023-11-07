@@ -71,7 +71,7 @@ public class Ball : MonoBehaviour
         }
 
         // If the ball hits a paddle, invert its x-direction
-        if (col.gameObject.name == "PlayerOne" || col.gameObject.name == "PlayerTwo")
+        if (col.gameObject.name == "PlayerOne" || col.gameObject.name == "PlayerTwo" | col.gameObject.tag == "WallTrap")
         {
             speed += 0.5f;
             normalSpeed += 0.5f;

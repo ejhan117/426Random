@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using TMPro;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ public class Player : Paddle
     private int powerUp1Stock = 0;
     private int powerUp2Stock = 0;
     private int powerUp3Stock = 0;
+    private int powerup4Stock = 0;
 
     public bool readySplit = false;
     private void Start()
@@ -49,6 +51,7 @@ public class Player : Paddle
 
     private void Update()
     {
+        // Debug.Log(powerup4Stock);
         switch (playerNum)
         {
             case PlayerNum.Player2:
@@ -113,6 +116,30 @@ public class Player : Paddle
                 if (powerUp3Stock > 0) powerUp3Stock--;
                 UpdatePowerUpUI();
             }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                readySplit = true;
+            }
+            else
+            {
+                readySplit = false;
+            }
+
+            if(Input.GetKeyDown(KeyCode.LeftBracket))
+            {
+                Debug.Log("LB");
+                // check if there is a game object along x == 0
+                GameObject ball = GameObject.FindGameObjectWithTag("Ball");
+
+                if (ball != null)
+                {
+                   if (ball.transform.position.x != 0)
+                   {
+                        ActivatePowerUpOfType<WallTrapPowerUp>();
+                   }
+                }
+            }   
         }
 
         if(playerNum == PlayerNum.Player2)
@@ -224,7 +251,7 @@ public class Player : Paddle
     {
         //TODO: Change range to 0,3 once implemented splitball
         Debug.Log("Adding powerup");
-        int randomPowerUp = Random.Range(0, 3);
+        int randomPowerUp = Random.Range(0, 8);
         switch (randomPowerUp)
         {
             case 0:
@@ -239,6 +266,26 @@ public class Player : Paddle
                 powerUpInventory.Add(new SplitBall());
                 powerUp3Stock++;
                 break;
+            case 4:
+                powerUpInventory.Add(new ExpandPaddle());
+                powerUp1Stock++;
+                break;
+            case 5:
+                powerUpInventory.Add(new LightningBall());
+                powerUp2Stock++;
+                break;
+            case 6:
+                powerUpInventory.Add(new SplitBall());
+                powerUp3Stock++;
+                break;
+            case 7:
+                // should probably only be able to have one wall at a time
+                Debug.Log("Wall Gained For Player: " + playerNum);
+                powerUpInventory.Add(new WallTrapPowerUp());
+                powerup4Stock++;
+                break;
+
+
         }
     }
 
