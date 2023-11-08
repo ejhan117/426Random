@@ -34,6 +34,8 @@ public class Player : Paddle
     public bool readySplit = false;
 
     public bool wormholeMode = false;
+
+    private int numSizeIncreases = 0;
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());
@@ -100,6 +102,10 @@ public class Player : Paddle
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
+                if(numSizeIncreases >= 3)
+                {
+                    return;
+                }
                 ActivatePowerUpOfType<ExpandPaddle>();
                 if (powerUp1Stock > 0) powerUp1Stock--;
                 UpdatePowerUpUI();
@@ -132,6 +138,10 @@ public class Player : Paddle
         {
             if (Input.GetKeyDown(KeyCode.Comma) || Input.GetButtonDown("Fire1"))
             {
+                if (numSizeIncreases >= 3)
+                {
+                    return;
+                }
                 ActivatePowerUpOfType<ExpandPaddle>();
                 if (powerUp1Stock > 0) powerUp1Stock--;
                 UpdatePowerUpUI();
@@ -188,7 +198,6 @@ public class Player : Paddle
 
     private IEnumerator GenerateRandomPowerUp()
     {
-        //TODO: Add the SplitBall Powerup
         while (true)
         {
             yield return new WaitForSeconds(10f);
@@ -201,6 +210,10 @@ public class Player : Paddle
     {
         yield return new WaitForSeconds(powerUp.duration);
         powerUp.Deactivate(this);
+        if(powerUp is ExpandPaddle)
+        {
+            numSizeIncreases--;
+        }
     }
 
 
@@ -223,6 +236,7 @@ public class Player : Paddle
             {
                 AddSplitBallPowerUp(); // This method should increment the splitBallCount
             }
+
         }
         else
         {
@@ -288,6 +302,11 @@ public class Player : Paddle
     public void UseSplitBallPowerUp()
     {
         splitBallCount = 0; // Reset the count after using the power-up
+    }
+
+    public void SizeIncrease()
+    {
+        numSizeIncreases++;
     }
 
 }

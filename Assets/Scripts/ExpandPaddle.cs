@@ -9,6 +9,7 @@ public class ExpandPaddle : PowerUp
     public override void Activate(Player player)
     {
         player.transform.localScale = new Vector3(player.transform.localScale.x, player.transform.localScale.y + sizeIncrease, player.transform.localScale.z);
+        player.SizeIncrease();
     }
 
     public override void Deactivate(Player player)
