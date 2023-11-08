@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class ExpandPaddle : PowerUp
 {
-    private float originalSize;
-    private float increasedSize = 4.0f; // or whatever value you want
+    private float sizeIncrease = 2.0f; // or whatever value you want
 
     public override void Activate(Player player)
     {
-        originalSize = player.transform.localScale.y;
-        player.transform.localScale = new Vector3(player.transform.localScale.x, increasedSize, player.transform.localScale.z);
+        player.transform.localScale = new Vector3(player.transform.localScale.x, player.transform.localScale.y + sizeIncrease, player.transform.localScale.z);
     }
 
     public override void Deactivate(Player player)
     {
-        player.transform.localScale = new Vector3(player.transform.localScale.x, originalSize, player.transform.localScale.z);
+        player.transform.localScale = new Vector3(player.transform.localScale.x, player.transform.localScale.y - sizeIncrease, player.transform.localScale.z);
     }
 }
