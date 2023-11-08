@@ -97,6 +97,11 @@ public class Ball : MonoBehaviour
             {
                 ResetBall();
             }
+            else
+            {
+                rb.velocity = Vector2.zero;
+                Destroy(this.gameObject, 2.0f);
+            }
         }
         else if(col.gameObject.name == "Right Wall")
         {
@@ -107,6 +112,11 @@ public class Ball : MonoBehaviour
             if (!isClone)
             {
                 ResetBall();
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+                Destroy(this.gameObject, 2.0f);
             }
         }
     }
@@ -137,17 +147,18 @@ public class Ball : MonoBehaviour
 
     public void Split(int splitCount)
     {
+        float totalYChange = Mathf.Abs(2.0f * direction.y);
+        float yIncrement = totalYChange / splitCount;
         for (int i = 0; i < splitCount; i++)
         {
             // Create a new ball at the current position
-            GameObject newBallObject = Instantiate(gameObject, transform.position + new Vector3(0.1f * (i + 1), 0.1f * (i + 1), 0), Quaternion.identity);
+            GameObject newBallObject = Instantiate(gameObject, transform.position , Quaternion.identity);
 
             // Get the Ball script component of the new ball
             Ball newBall = newBallObject.GetComponent<Ball>();
             newBall.isClone = true;
 
-            // Optionally, you can set the new ball's direction to be different from the current ball
-            Vector2 newDirection = new Vector2(direction.x, -direction.y).normalized;
+            Vector2 newDirection = new Vector2(direction.x, direction.y - (yIncrement * (i+1))).normalized;
             newBall.SetDirection(newDirection);
         }
     }
@@ -157,7 +168,6 @@ public class Ball : MonoBehaviour
         Debug.Log("SetDirection called on instance: " + this);
         if (rb == null)
         {
-            Debug.Log("No rigidBody!");
             rb = gameObject.GetComponent<Rigidbody2D>();
         }
         direction = newDirection;
@@ -175,4 +185,5 @@ public class Ball : MonoBehaviour
     {
         rb.velocity = direction * speed;
     }
+
 }
