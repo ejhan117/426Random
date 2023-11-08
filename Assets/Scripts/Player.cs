@@ -26,8 +26,11 @@ public class Player : Paddle
     private int powerUp1Stock = 0;
     private int powerUp2Stock = 0;
     private int powerUp3Stock = 0;
+    private int powerUp5Stock = 0;
 
     public bool readySplit = false;
+
+    public bool wormholeMode = false;
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());
@@ -113,6 +116,13 @@ public class Player : Paddle
                 if (powerUp3Stock > 0) powerUp3Stock--;
                 UpdatePowerUpUI();
             }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ActivatePowerUpOfType<Wormhole>();
+                if (powerUp5Stock > 0) powerUp5Stock--;
+                UpdatePowerUpUI();
+            }
         }
 
         if(playerNum == PlayerNum.Player2)
@@ -138,6 +148,13 @@ public class Player : Paddle
                 if (powerUp3Stock > 0) powerUp3Stock--;
                 UpdatePowerUpUI();
             }
+
+            if(Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Jump"))
+            {
+                ActivatePowerUpOfType<Wormhole>();
+                if (powerUp5Stock > 0) powerUp5Stock--;
+                UpdatePowerUpUI();
+            } 
         }
     }
 
@@ -224,20 +241,30 @@ public class Player : Paddle
     {
         //TODO: Change range to 0,3 once implemented splitball
         Debug.Log("Adding powerup");
-        int randomPowerUp = Random.Range(0, 3);
+        int randomPowerUp = Random.Range(0, 10);
         switch (randomPowerUp)
         {
             case 0:
+            case 1:
+            case 2:
                 powerUpInventory.Add(new ExpandPaddle());
                 powerUp1Stock++;
                 break;
-            case 1:
+            case 3:
+            case 4:
+            case 5:
                 powerUpInventory.Add(new LightningBall());
                 powerUp2Stock++;
                 break;
-            case 2:
+            case 6:
+            case 7:
+            case 8:
                 powerUpInventory.Add(new SplitBall());
                 powerUp3Stock++;
+                break;
+            case 9:
+                powerUpInventory.Add(new Wormhole());
+                powerUp5Stock++;
                 break;
         }
     }

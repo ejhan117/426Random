@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     public Player pTwo;
     public TMP_Text gameOver;
     public int maxScore = 10;
+
+    public Image fadeImage; // UI Image to overlay
+    public float fadeSpeed = 0.8f; // Speed of the fade
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +67,19 @@ public class GameManager : MonoBehaviour
 
         // Reload the current scene
         Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator FadeAndRestart()
+    {
+        // Fade to black
+        for (float i = 0; i <= 1; i += Time.deltaTime * fadeSpeed)
+        {
+            fadeImage.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+
+        // Reload the scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

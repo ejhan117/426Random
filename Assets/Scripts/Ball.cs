@@ -79,15 +79,21 @@ public class Ball : MonoBehaviour
             rb.velocity = direction * speed;
             audioSource.Play();
             Player player = col.gameObject.GetComponent<Player>();
+
+            if(player != null && player.wormholeMode)
+            {
+                float newXPos = Random.Range(-5,0);
+                if (col.gameObject.name == "PlayerOne") newXPos = Random.Range(0,5);
+                float newYPos = Random.Range(-4, 4);
+                Vector3 newPos = new Vector3(newXPos, newYPos, 0.0f);
+                transform.position = newPos;
+            }
             if(player != null && player.readySplit)
             {
-                //if (isClone)
-                //{
-                //    return;
-                //}
                 Split();
                 player.readySplit = false;
             }
+
         }
 
         // If the ball hits the Left or Right Wall , reset ball and give point
