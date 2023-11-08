@@ -15,7 +15,7 @@ public class LightningBall : PowerUp
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public override void Activate(Player player)

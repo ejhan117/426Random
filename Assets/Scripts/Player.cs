@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : Paddle
 {
@@ -49,6 +50,17 @@ public class Player : Paddle
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab)){
+          Scene currentScene = SceneManager.GetActiveScene();
+          string sceneName = currentScene.name;
+          if (sceneName ==  "SampleScene"){
+              SceneManager.LoadScene("Instructions");
+          }
+          else{
+              SceneManager.LoadScene("SampleScene");
+          }
+        }
+        // Tristan addition ^^^
         switch (playerNum)
         {
             case PlayerNum.Player2:
