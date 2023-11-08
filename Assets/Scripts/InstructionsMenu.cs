@@ -8,6 +8,12 @@ public class InstructionsMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject scoreCanvas;
 
+    private void Start()
+    {
+        Pause();
+
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -24,6 +24,7 @@ public class Player : Paddle
     public Image powerUp3Image;
     public TMP_Text powerUp3StockText;
 
+
     private int powerUp1Stock = 0;
     private int powerUp2Stock = 0;
     private int powerUp3Stock = 0;
@@ -33,33 +34,11 @@ public class Player : Paddle
     {
         StartCoroutine(GenerateRandomPowerUp());
         UpdateScoreboard();
-        GameObject textObject;
-        switch (playerNum)
-        {
-            case PlayerNum.Player2:
-                textObject = GameObject.Find("PlayerTwoScore");
-                scoreText = textObject.GetComponent<TMP_Text>();
-                break;
-            case PlayerNum.Player1:
-                textObject = GameObject.Find("PlayerOneScore");
-                scoreText = textObject.GetComponent<TMP_Text>();
-                break;
-        }
         UpdatePowerUpUI();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)){
-          Scene currentScene = SceneManager.GetActiveScene();
-          string sceneName = currentScene.name;
-          if (sceneName ==  "SampleScene"){
-              SceneManager.LoadScene("Instructions");
-          }
-          else{
-              SceneManager.LoadScene("SampleScene");
-          }
-        }
         // Tristan addition ^^^
         switch (playerNum)
         {
