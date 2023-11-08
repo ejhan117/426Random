@@ -22,13 +22,18 @@ public class Player : Paddle
     public TMP_Text powerUp2StockText;
     public Image powerUp3Image;
     public TMP_Text powerUp3StockText;
+    public Image wormholeImage;
+    public TMP_Text wormholeStockText;
 
     private int powerUp1Stock = 0;
     private int powerUp2Stock = 0;
     private int powerUp3Stock = 0;
     public int splitBallCount = 0;
+    private int wormholeStock = 0;
 
     public bool readySplit = false;
+
+    public bool wormholeMode = false;
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());
@@ -114,6 +119,13 @@ public class Player : Paddle
                 if (powerUp3Stock > 0) powerUp3Stock--;
                 UpdatePowerUpUI();
             }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                ActivatePowerUpOfType<Wormhole>();
+                if (wormholeStock > 0) wormholeStock--;
+                UpdatePowerUpUI();
+            }
         }
 
         if(playerNum == PlayerNum.Player2)
@@ -139,6 +151,13 @@ public class Player : Paddle
                 if (powerUp3Stock > 0) powerUp3Stock--;
                 UpdatePowerUpUI();
             }
+
+            if(Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Jump"))
+            {
+                ActivatePowerUpOfType<Wormhole>();
+                if (wormholeStock > 0) wormholeStock--;
+                UpdatePowerUpUI();
+            } 
         }
     }
 
@@ -224,26 +243,40 @@ public class Player : Paddle
         // Update the UI for Power-Up 3
         powerUp3StockText.text = powerUp3Stock.ToString();
         powerUp3Image.color = (powerUp3Stock > 0) ? Color.green : Color.gray;
+
+        // Update the UI for WormHole
+        wormholeStockText.text = wormholeStock.ToString();
+        wormholeImage.color = (wormholeStock > 0) ? Color.green : Color.gray;
     }
 
     public void AddPowerUp()
     {
         //TODO: Change range to 0,3 once implemented splitball
         Debug.Log("Adding powerup");
-        int randomPowerUp = Random.Range(0, 3);
+        int randomPowerUp = Random.Range(0, 10);
         switch (randomPowerUp)
         {
             case 0:
+            case 1:
+            case 2:
                 powerUpInventory.Add(new ExpandPaddle());
                 powerUp1Stock++;
                 break;
-            case 1:
+            case 3:
+            case 4:
+            case 5:
                 powerUpInventory.Add(new LightningBall());
                 powerUp2Stock++;
                 break;
-            case 2:
+            case 6:
+            case 7:
+            case 8:
                 powerUpInventory.Add(new SplitBall());
                 powerUp3Stock++;
+                break;
+            case 9:
+                powerUpInventory.Add(new Wormhole());
+                wormholeStock++;
                 break;
         }
     }
