@@ -26,6 +26,7 @@ public class Player : Paddle
     private int powerUp1Stock = 0;
     private int powerUp2Stock = 0;
     private int powerUp3Stock = 0;
+    public int splitBallCount = 0;
 
     public bool readySplit = false;
     private void Start()
@@ -198,6 +199,11 @@ public class Player : Paddle
                 StartCoroutine(DeactivatePowerUpAfterDuration(powerUpToActivate));
             }
             powerUpInventory.Remove(powerUpToActivate);
+            // If it's a SplitBall, increment the splitBallCount
+            if (typeof(T) == typeof(SplitBall))
+            {
+                AddSplitBallPowerUp(); // This method should increment the splitBallCount
+            }
         }
         else
         {
@@ -240,6 +246,15 @@ public class Player : Paddle
                 powerUp3Stock++;
                 break;
         }
+    }
+    public void AddSplitBallPowerUp()
+    {
+        splitBallCount++;
+    }
+
+    public void UseSplitBallPowerUp()
+    {
+        splitBallCount = 0; // Reset the count after using the power-up
     }
 
 }

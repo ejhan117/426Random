@@ -79,14 +79,10 @@ public class Ball : MonoBehaviour
             rb.velocity = direction * speed;
             audioSource.Play();
             Player player = col.gameObject.GetComponent<Player>();
-            if(player != null && player.readySplit)
+            if (player != null && player.splitBallCount > 0)
             {
-                //if (isClone)
-                //{
-                //    return;
-                //}
-                Split();
-                player.readySplit = false;
+                Split(player.splitBallCount); // Pass the splitBallCount to the Split method
+                player.UseSplitBallPowerUp(); // This should reset the splitBallCount to 0
             }
         }
 
@@ -139,28 +135,21 @@ public class Ball : MonoBehaviour
     
     }
 
-    public void Split()
+    public void Split(int splitCount)
     {
-        // Create a new ball at the current position
-        GameObject newBallObject = Instantiate(gameObject, transform.position + new Vector3(0.1f, 0.1f, 0), Quaternion.identity);
+        for (int i = 0; i < splitCount; i++)
+        {
+            // Create a new ball at the current position
+            GameObject newBallObject = Instantiate(gameObject, transform.position + new Vector3(0.1f * (i + 1), 0.1f * (i + 1), 0), Quaternion.identity);
 
-        // Get the Ball script component of the new ball
-        Ball newBall = newBallObject.GetComponent<Ball>();
-        newBall.isClone = true;
+            // Get the Ball script component of the new ball
+            Ball newBall = newBallObject.GetComponent<Ball>();
+            newBall.isClone = true;
 
-        // Temporarily disable colliders
-        Collider2D newBallCollider = newBallObject.GetComponent<Collider2D>();
-        Collider2D originalBallCollider = GetComponent<Collider2D>();
-        newBallCollider.enabled = false;
-        originalBallCollider.enabled = false;
-
-        // Re-enable colliders after a short delay
-        StartCoroutine(EnableCollidersAfterDelay(newBallCollider, originalBallCollider, 0.1f));
-
-
-        // Optionally, you can set the new ball's direction to be different from the current ball
-        Vector2 newDirection = new Vector2(direction.x, -direction.y).normalized;
-        newBall.SetDirection(newDirection);
+            // Optionally, you can set the new ball's direction to be different from the current ball
+            Vector2 newDirection = new Vector2(direction.x, -direction.y).normalized;
+            newBall.SetDirection(newDirection);
+        }
     }
 
     public void SetDirection(Vector2 newDirection)
