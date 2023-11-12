@@ -85,15 +85,6 @@ public class Ball : MonoBehaviour
                 player.UseSplitBallPowerUp(); // This should reset the splitBallCount to 0
             }
 
-            if(player != null && player.wormholeMode)
-            {
-                float newXPos = Random.Range(-5,0);
-                if (col.gameObject.name == "PlayerOne") newXPos = Random.Range(0,5);
-                float newYPos = Random.Range(-4, 4);
-                Vector3 newPos = new Vector3(newXPos, newYPos, 0.0f);
-                transform.position = newPos;
-            }
-
         }
 
         // If the ball hits the Left or Right Wall , reset ball and give point

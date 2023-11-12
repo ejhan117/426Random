@@ -19,6 +19,11 @@ public class SplitBall : PowerUp
     public override void Activate(Player player)
     {
         player.readySplit = true;
+        Renderer r = player.GetComponent<Renderer>();
+        if(r != null) 
+        {
+            r.material.color = Color.red;
+        }
     }
 
     public override void Deactivate(Player player)
