@@ -1686,7 +1686,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.15
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -5997,11 +5997,19 @@ PrefabInstance:
       objectReference: {fileID: 162043503}
     - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_Size.x
-      value: 0.48708725
+      value: 0.1472559
       objectReference: {fileID: 0}
     - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_Offset.x
-      value: -0.25645638
+      value: -0.42642212
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6057,6 +6065,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.83
       objectReference: {fileID: 0}
@@ -6102,11 +6118,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_Size.x
-      value: 0.498374
+      value: 0.10255045
       objectReference: {fileID: 0}
     - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_Offset.x
-      value: 0.250813
+      value: 0.44877478
       objectReference: {fileID: 0}
     - target: {fileID: 7621390953062417108, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: scoreText
