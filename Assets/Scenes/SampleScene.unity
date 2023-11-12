@@ -4926,6 +4926,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1893536205}
     - target: {fileID: 3625036168895046105, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: otherPlayer
+      value: 
+      objectReference: {fileID: 404536109}
+    - target: {fileID: 3625036168895046105, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: powerUp1Image
       value: 
       objectReference: {fileID: 570609055}
@@ -4975,11 +4979,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.85
+      value: 7.38
       objectReference: {fileID: 0}
     - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5036,11 +5040,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.83
+      value: -7.32
       objectReference: {fileID: 0}
     - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5090,6 +5094,10 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1504154099}
+    - target: {fileID: 7621390953062417108, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: otherPlayer
+      value: 
+      objectReference: {fileID: 123051548}
     - target: {fileID: 7621390953062417108, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: powerUp1Image
       value: 

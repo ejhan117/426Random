@@ -29,9 +29,11 @@ public class Player : Paddle
     public int splitBallCount = 0;
 
     public bool readySplit = false;
+    public Player otherPlayer;
 
 
     private int numSizeIncreases = 0;
+    private int numSizeDecreases = 0;
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());
@@ -102,7 +104,11 @@ public class Player : Paddle
                 {
                     return;
                 }
-                ActivatePowerUpOfType<ExpandPaddle>();
+                else if (numSizeDecreases >= 3){
+                    return;
+                }
+                //ActivatePowerUpOfType<ExpandPaddle>();
+                ActivatePowerUpOfType<ShrinkPaddle>();
                 if (powerUp1Stock > 0) powerUp1Stock--;
                 UpdatePowerUpUI();
             }
@@ -246,27 +252,30 @@ public class Player : Paddle
     {
         //TODO: Change range to 0,3 once implemented splitball
         Debug.Log("Adding powerup");
-        int randomPowerUp = Random.Range(0, 9);
+        int randomPowerUp = Random.Range(0, 1);
         switch (randomPowerUp)
         {
             case 0:
-            case 1:
-            case 2:
-                powerUpInventory.Add(new ExpandPaddle());
-                powerUp1Stock++;
-                break;
-            case 3:
-            case 4:
-            case 5:
-                powerUpInventory.Add(new LightningBall());
-                powerUp2Stock++;
-                break;
-            case 6:
-            case 7:
-            case 8:
-                powerUpInventory.Add(new SplitBall());
-                powerUp3Stock++;
-                break;
+              powerUpInventory.Add( new ShrinkPaddle());
+              powerUp1Stock++;
+              break;
+            // case 1:
+            // case 2:
+            //     powerUpInventory.Add(new ExpandPaddle());
+            //     powerUp1Stock++;
+            //     break;
+            // case 3:
+            // case 4:
+            // case 5:
+            //     powerUpInventory.Add(new LightningBall());
+            //     powerUp2Stock++;
+            //     break;
+            // case 6:
+            // case 7:
+            // case 8:
+            //     powerUpInventory.Add(new SplitBall());
+            //     powerUp3Stock++;
+            //     break;
         }
     }
     public void AddSplitBallPowerUp()
@@ -287,6 +296,11 @@ public class Player : Paddle
     public void SizeIncrease()
     {
         numSizeIncreases++;
+    }
+
+    public void SizeDecrease()
+    {
+        numSizeDecreases++;
     }
 
 }
