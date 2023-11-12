@@ -40,14 +40,15 @@ public class GameManager : MonoBehaviour
             #endif
         }
 
-        if(pOne.score >= maxScore)
-        {
-            GameOver(1);
-        }
-        else if (pTwo.score >= maxScore)
-        {
-            GameOver(2);
-        }
+        //if(pOne.score >= maxScore)
+        //{
+        //    GameOver(1);
+        //}
+        //else if (pTwo.score >= maxScore)
+        //{
+        //    GameOver(2);
+        //}
+        //TODO: Make a better end condition than just score since it gets reached so easily?
     }
 
     public void GameOver(int winnerNum)
