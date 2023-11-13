@@ -24,6 +24,7 @@ public class SplitBall : PowerUp
         {
             r.material.color = Color.red;
         }
+        player.AddSplitBallPowerUp();
     }
 
     public override void Deactivate(Player player)

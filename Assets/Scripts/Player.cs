@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -38,6 +39,14 @@ public class Player : Paddle
 
     public Image[] powerUpImages = new Image[numBins];
     public TMP_Text[] powerUpNames = new TMP_Text[numBins];
+
+    private List<System.Type> availablePowerUps = new List<System.Type>
+    {
+        typeof(ExpandPaddle),
+        typeof(LightningBall),
+        typeof(SplitBall),
+        //Add More Powerups Here
+    };
 
     private void Start()
     {
@@ -185,49 +194,8 @@ public class Player : Paddle
             numSizeIncreases--;
         }
     }
-
-
-    private void ActivatePowerUpOfType<T>() where T : PowerUp
-    {
-        // Find the first power-up of the specified type
-        PowerUp powerUpToActivate = powerUpInventory.Find(p => p is T);
-
-        // If we found a power-up, activate it and remove it from the inventory
-        if (powerUpToActivate != null)
-        {
-            powerUpToActivate.Activate(this);
-            if (powerUpToActivate.duration > 0)
-            {
-                StartCoroutine(DeactivatePowerUpAfterDuration(powerUpToActivate));
-            }
-            powerUpInventory.Remove(powerUpToActivate);
-            // If it's a SplitBall, increment the splitBallCount
-            if (typeof(T) == typeof(SplitBall))
-            {
-                AddSplitBallPowerUp(); // This method should increment the splitBallCount
-            }
-
-        }
-        else
-        {
-            Debug.Log("No power-up of type " + typeof(T) + " found in inventory.");
-        }
-    }
-
     public void UpdatePowerUpUI()
     {
-        //// Update the UI for Power-Up 1
-        //powerUp1StockText.text = powerUp1Stock.ToString();
-        //powerUp1Image.color = (powerUp1Stock > 0) ? Color.green : Color.gray;
-
-        //// Update the UI for Power-Up 2
-        //powerUp2StockText.text = powerUp2Stock.ToString();
-        //powerUp2Image.color = (powerUp2Stock > 0) ? Color.green : Color.gray;
-
-        //// Update the UI for Power-Up 3
-        //powerUp3StockText.text = powerUp3Stock.ToString();
-        //powerUp3Image.color = (powerUp3Stock > 0) ? Color.green : Color.gray;
-
         for(int i = 0; i < numBins; i++)
         {
             UpdatePowerUpUIForBin(i);
@@ -236,23 +204,13 @@ public class Player : Paddle
 
     public void AddPowerUp()
     {
-        int randomPowerUp = Random.Range(0, 3);
-        PowerUp newPower = null;
+        int randomIndex = UnityEngine.Random.Range(0, availablePowerUps.Count);
+        System.Type selectedType = availablePowerUps[randomIndex];
 
-        switch (randomPowerUp)
-        {
-            case 0:
-                newPower = new ExpandPaddle();
-                break;
-            case 1:
-                newPower = new LightningBall();
-                break;
-            case 2:
-                newPower = new SplitBall();
-                break;
-        }
+        // Use reflection to create an instance of the selected powerup
+        PowerUp newPower = (PowerUp)Activator.CreateInstance(selectedType);
 
-        for(int i = 0; i < numBins; i++) 
+        for (int i = 0; i < numBins; i++) 
         {
             if (powerUpBins[i] == null)
             {
@@ -295,6 +253,8 @@ public class Player : Paddle
         {
             StartCoroutine(DeactivatePowerUpAfterDuration(powerUpToActivate));
         }
+
+        powerUpBins[binIndex] = null;   
 
         UpdatePowerUpUI();
     }
