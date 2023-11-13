@@ -5,7 +5,7 @@ public abstract class Paddle : MonoBehaviour
 {
     public new Rigidbody2D rigidbody { get; private set; }
 
-    protected float speed = 7f;
+    public float speed = 7f;
 
     public bool useDynamicBounce = false;
 

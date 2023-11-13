@@ -108,7 +108,7 @@ public class Player : Paddle
                     return;
                 }
                 //ActivatePowerUpOfType<ExpandPaddle>();
-                ActivatePowerUpOfType<ShrinkPaddle>();
+                ActivatePowerUpOfType<SlowPaddle>();
                 if (powerUp1Stock > 0) powerUp1Stock--;
                 UpdatePowerUpUI();
             }
@@ -256,7 +256,7 @@ public class Player : Paddle
         switch (randomPowerUp)
         {
             case 0:
-              powerUpInventory.Add( new ShrinkPaddle());
+              powerUpInventory.Add( new SlowPaddle());
               powerUp1Stock++;
               break;
             // case 1:
