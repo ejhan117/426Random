@@ -36,7 +36,8 @@ public class Player : Paddle
         typeof(SplitBall),
         typeof(ShrinkPaddle),
         typeof(SlowPaddle),
-        typeof(GhostPaddle)
+        typeof(GhostPaddle),
+        typeof(InvisiBall)
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
