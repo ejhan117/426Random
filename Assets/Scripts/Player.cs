@@ -16,17 +16,6 @@ public class Player : Paddle
     public TMP_Text scoreText;
 
     public List<PowerUp> powerUpInventory = new List<PowerUp>();
-
-    public Image powerUp1Image;
-    public TMP_Text powerUp1StockText;
-    public Image powerUp2Image;
-    public TMP_Text powerUp2StockText;
-    public Image powerUp3Image;
-    public TMP_Text powerUp3StockText;
-
-    private int powerUp1Stock = 0;
-    private int powerUp2Stock = 0;
-    private int powerUp3Stock = 0;
     public int splitBallCount = 0;
 
     public bool readySplit = false;
@@ -47,6 +36,7 @@ public class Player : Paddle
         typeof(SplitBall),
         typeof(ShrinkPaddle),
         typeof(SlowPaddle),
+        typeof(GhostPaddle)
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
@@ -211,7 +201,7 @@ public class Player : Paddle
 
         // Use reflection to create an instance of the selected powerup
         PowerUp newPower = (PowerUp)Activator.CreateInstance(selectedType);
-        for (int i = 0; i < numBins; i++) 
+        for (int i = 0; i < numBins; i++)
         {
             if (powerUpBins[i] == null)
             {
@@ -256,7 +246,7 @@ public class Player : Paddle
             StartCoroutine(DeactivatePowerUpAfterDuration(powerUpToActivate));
         }
 
-        powerUpBins[binIndex] = null;   
+        powerUpBins[binIndex] = null;
 
         UpdatePowerUpUI();
     }
