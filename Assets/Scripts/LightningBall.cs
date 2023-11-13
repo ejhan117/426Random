@@ -44,7 +44,11 @@ public class LightningBall : PowerUp
             Ball ballScript = ball.GetComponent<Ball>();
             if (ballScript != null)
             {
-                ballScript.speed = 9.0f;
+                ballScript.speed /= speedMultiplier;
+                if(ballScript.speed < 9.0f)
+                {
+                    ballScript.speed = 9.0f;
+                }
             }
             ballScript.UpdateSpeed();
         }

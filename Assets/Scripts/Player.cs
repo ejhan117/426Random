@@ -30,10 +30,10 @@ public class Player : Paddle
     public int splitBallCount = 0;
 
     public bool readySplit = false;
+    public Player otherPlayer;
 
 
     private int numSizeIncreases = 0;
-
     private const int numBins = 3;
     public PowerUp[] powerUpBins = new PowerUp[numBins];
 
@@ -45,9 +45,11 @@ public class Player : Paddle
         typeof(ExpandPaddle),
         typeof(LightningBall),
         typeof(SplitBall),
+        typeof(ShrinkPaddle),
+        typeof(SlowPaddle),
         //Add More Powerups Here
     };
-
+    private int numSizeDecreases = 0;
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());
@@ -209,7 +211,6 @@ public class Player : Paddle
 
         // Use reflection to create an instance of the selected powerup
         PowerUp newPower = (PowerUp)Activator.CreateInstance(selectedType);
-
         for (int i = 0; i < numBins; i++) 
         {
             if (powerUpBins[i] == null)
@@ -217,6 +218,7 @@ public class Player : Paddle
                 powerUpBins[i] = newPower;
                 break;
             }
+
         }
     }
     public void AddSplitBallPowerUp()
@@ -274,6 +276,10 @@ public class Player : Paddle
             powerUpNames[binIndex].text = "";
             powerUpImages[binIndex].color = Color.grey;
         }
+    }
+    public void SizeDecrease()
+    {
+        numSizeDecreases++;
     }
 
 }
