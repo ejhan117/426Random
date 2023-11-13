@@ -25,6 +25,7 @@ public class LightningBall : PowerUp
                 ballScript.speed *= speedMultiplier;
             }
             ballScript.UpdateSpeed();
+            ballScript.GetComponent<Renderer>().material.color = Color.yellow;
         }
         //Ball ballInstance = GameObject.FindObjectOfType<Ball>();  // Find the Ball instance in the scene
         //if (ballInstance != null)
@@ -50,6 +51,7 @@ public class LightningBall : PowerUp
                     ballScript.speed = 9.0f;
                 }
             }
+            ballScript.GetComponent<Renderer>().material.color = Color.white;
             ballScript.UpdateSpeed();
         }
     }

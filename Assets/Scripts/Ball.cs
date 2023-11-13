@@ -141,11 +141,10 @@ public class Ball : MonoBehaviour
     public void ResetBall()
     {
         //TODO: Check if ball is a new ball (From the power up), if so, delete instead of starting coroutine
-        Debug.Log("HERE!");
-        Debug.Log(rb.velocity);
         transform.position = Vector2.zero;
         speed = 0.0f;
         normalSpeed = 9.0f;
+        GetComponent<Renderer>().material.color = Color.white;
         StartCoroutine(StartAfterDelay());
     }
 
