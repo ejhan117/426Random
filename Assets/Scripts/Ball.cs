@@ -43,6 +43,7 @@ public class Ball : MonoBehaviour
     IEnumerator StartAfterDelay()
     {
         yield return new WaitForSeconds(1.0f);
+        speed = 9.0f;
         LaunchBall();
     }
     void LaunchBall()
@@ -56,7 +57,6 @@ public class Ball : MonoBehaviour
         {
             direction = new Vector2(-1, Random.Range(-1.0f, 1.0f)).normalized;
         }
-
         rb.velocity = direction * speed;
     }
 
@@ -73,9 +73,24 @@ public class Ball : MonoBehaviour
         // If the ball hits a paddle, invert its x-direction
         if (col.gameObject.name == "PlayerOne" || col.gameObject.name == "PlayerTwo")
         {
+            if (col.gameObject.name == "PlayerOne")
+            {
+                if (direction.x > 0)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (direction.x < 0)
+                {
+                    return;
+                }
+            }
             speed += 0.5f;
             normalSpeed += 0.5f;
             direction.x = -direction.x;
+            direction.Normalize();
             rb.velocity = direction * speed;
             audioSource.Play();
             Player player = col.gameObject.GetComponent<Player>();
@@ -127,10 +142,9 @@ public class Ball : MonoBehaviour
     {
         //TODO: Check if ball is a new ball (From the power up), if so, delete instead of starting coroutine
         Debug.Log("HERE!");
-        rb.velocity = Vector2.zero;
         Debug.Log(rb.velocity);
         transform.position = Vector2.zero;
-        speed = 9.0f;
+        speed = 0.0f;
         normalSpeed = 9.0f;
         StartCoroutine(StartAfterDelay());
     }
@@ -138,12 +152,11 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //rb.velocity = direction * speed;
+        rb.velocity = direction * speed;
     }
 
     void PLayScoreSound() {
         scoreAudioSource.PlayOneShot(scoreSound);
-    
     }
 
     public void Split(int splitCount)

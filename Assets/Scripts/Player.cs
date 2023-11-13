@@ -243,7 +243,7 @@ public class Player : Paddle
     {
         if (binIndex < 0 || binIndex >= numBins || powerUpBins[binIndex] == null)
         {
-            Debug.LogError("Invalid bin index or empty bin.");
+            Debug.Log("Invalid bin index or empty bin.");
             return;
         }
 

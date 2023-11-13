@@ -4921,6 +4921,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 3305172379670948442, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3625036168895046105, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: scoreText
       value: 
@@ -4983,11 +4987,19 @@ PrefabInstance:
       objectReference: {fileID: 1733423694}
     - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_Size.x
-      value: 0.1472559
+      value: 0.28373718
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0647917
       objectReference: {fileID: 0}
     - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_Offset.x
-      value: -0.42642212
+      value: -0.49466276
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0011998117
       objectReference: {fileID: 0}
     - target: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_LocalScale.x
@@ -5050,6 +5062,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2338427624165125803, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.4
@@ -5104,11 +5120,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_Size.x
-      value: 0.10255045
+      value: 0.28226137
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0721893
       objectReference: {fileID: 0}
     - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_Offset.x
-      value: 0.44877478
+      value: 0.53863025
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.00049486756
       objectReference: {fileID: 0}
     - target: {fileID: 7621390953062417108, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: scoreText
