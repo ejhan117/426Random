@@ -5,7 +5,7 @@ using UnityEngine;
 public class GhostPaddle : PowerUp
 {
     // Start is called before the first frame update
-    public GhostPaddle() : base("Ghost Paddle", 10.0f)
+    public GhostPaddle() : base("Ghost Paddle", 5.0f)
     {
 
     }
