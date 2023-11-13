@@ -32,6 +32,13 @@ public class Player : Paddle
 
 
     private int numSizeIncreases = 0;
+
+    private const int numBins = 3;
+    public PowerUp[] powerUpBins = new PowerUp[numBins];
+
+    public Image[] powerUpImages = new Image[numBins];
+    public TMP_Text[] powerUpNames = new TMP_Text[numBins];
+
     private void Start()
     {
         StartCoroutine(GenerateRandomPowerUp());
@@ -98,28 +105,18 @@ public class Player : Paddle
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                if(numSizeIncreases >= 3)
-                {
-                    return;
-                }
-                ActivatePowerUpOfType<ExpandPaddle>();
-                if (powerUp1Stock > 0) powerUp1Stock--;
-                UpdatePowerUpUI();
+                ActivatePowerUpFromBin(0);
             }
 
             // Activate the first "Faster Ball" power-up in the inventory when '2' is pressed
             if (Input.GetKeyDown(KeyCode.O))
             {
-                ActivatePowerUpOfType<LightningBall>();
-                if (powerUp2Stock > 0) powerUp2Stock--;
-                UpdatePowerUpUI();
+                ActivatePowerUpFromBin(1);
             }
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                ActivatePowerUpOfType<SplitBall>();
-                if (powerUp3Stock > 0) powerUp3Stock--;
-                UpdatePowerUpUI();
+                ActivatePowerUpFromBin(2);
             }
 
         }
@@ -128,28 +125,18 @@ public class Player : Paddle
         {
             if (Input.GetKeyDown(KeyCode.Comma) || Input.GetButtonDown("Fire1"))
             {
-                if (numSizeIncreases >= 3)
-                {
-                    return;
-                }
-                ActivatePowerUpOfType<ExpandPaddle>();
-                if (powerUp1Stock > 0) powerUp1Stock--;
-                UpdatePowerUpUI();
+                ActivatePowerUpFromBin(0);
             }
 
             // Activate the first "Faster Ball" power-up in the inventory when '2' is pressed
             if (Input.GetKeyDown(KeyCode.Period) || Input.GetButtonDown("Fire2"))
             {
-                ActivatePowerUpOfType<LightningBall>();
-                if (powerUp2Stock > 0) powerUp2Stock--;
-                UpdatePowerUpUI();
+                ActivatePowerUpFromBin(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Slash) || Input.GetButtonDown("Fire3"))
             {
-                ActivatePowerUpOfType<SplitBall>();
-                if (powerUp3Stock > 0) powerUp3Stock--;
-                UpdatePowerUpUI();
+                ActivatePowerUpFromBin(2);
             }
         }
     }
@@ -229,44 +216,49 @@ public class Player : Paddle
 
     public void UpdatePowerUpUI()
     {
-        // Update the UI for Power-Up 1
-        powerUp1StockText.text = powerUp1Stock.ToString();
-        powerUp1Image.color = (powerUp1Stock > 0) ? Color.green : Color.gray;
+        //// Update the UI for Power-Up 1
+        //powerUp1StockText.text = powerUp1Stock.ToString();
+        //powerUp1Image.color = (powerUp1Stock > 0) ? Color.green : Color.gray;
 
-        // Update the UI for Power-Up 2
-        powerUp2StockText.text = powerUp2Stock.ToString();
-        powerUp2Image.color = (powerUp2Stock > 0) ? Color.green : Color.gray;
+        //// Update the UI for Power-Up 2
+        //powerUp2StockText.text = powerUp2Stock.ToString();
+        //powerUp2Image.color = (powerUp2Stock > 0) ? Color.green : Color.gray;
 
-        // Update the UI for Power-Up 3
-        powerUp3StockText.text = powerUp3Stock.ToString();
-        powerUp3Image.color = (powerUp3Stock > 0) ? Color.green : Color.gray;
+        //// Update the UI for Power-Up 3
+        //powerUp3StockText.text = powerUp3Stock.ToString();
+        //powerUp3Image.color = (powerUp3Stock > 0) ? Color.green : Color.gray;
+
+        for(int i = 0; i < numBins; i++)
+        {
+            UpdatePowerUpUIForBin(i);
+        }
     }
 
     public void AddPowerUp()
     {
-        //TODO: Change range to 0,3 once implemented splitball
-        Debug.Log("Adding powerup");
-        int randomPowerUp = Random.Range(0, 9);
+        int randomPowerUp = Random.Range(0, 3);
+        PowerUp newPower = null;
+
         switch (randomPowerUp)
         {
             case 0:
+                newPower = new ExpandPaddle();
+                break;
             case 1:
+                newPower = new LightningBall();
+                break;
             case 2:
-                powerUpInventory.Add(new ExpandPaddle());
-                powerUp1Stock++;
+                newPower = new SplitBall();
                 break;
-            case 3:
-            case 4:
-            case 5:
-                powerUpInventory.Add(new LightningBall());
-                powerUp2Stock++;
+        }
+
+        for(int i = 0; i < numBins; i++) 
+        {
+            if (powerUpBins[i] == null)
+            {
+                powerUpBins[i] = newPower;
                 break;
-            case 6:
-            case 7:
-            case 8:
-                powerUpInventory.Add(new SplitBall());
-                powerUp3Stock++;
-                break;
+            }
         }
     }
     public void AddSplitBallPowerUp()
@@ -287,6 +279,41 @@ public class Player : Paddle
     public void SizeIncrease()
     {
         numSizeIncreases++;
+    }
+
+    public void ActivatePowerUpFromBin(int binIndex)
+    {
+        if (binIndex < 0 || binIndex >= numBins || powerUpBins[binIndex] == null)
+        {
+            Debug.LogError("Invalid bin index or empty bin.");
+            return;
+        }
+
+        PowerUp powerUpToActivate = powerUpBins[binIndex];
+        powerUpToActivate.Activate(this);
+        if (powerUpToActivate.duration > 0)
+        {
+            StartCoroutine(DeactivatePowerUpAfterDuration(powerUpToActivate));
+        }
+
+        UpdatePowerUpUI();
+    }
+
+    private void UpdatePowerUpUIForBin(int binIndex)
+    {
+        if (powerUpBins[binIndex] != null)
+        {
+            string powerName = powerUpBins[binIndex].powerName;
+            Debug.Log(powerName);
+            powerUpNames[binIndex].text = powerName;
+            powerUpImages[binIndex].color = Color.green;
+            // Set the image sprite based on powerUp type if you have different sprites
+        }
+        else
+        {
+            powerUpNames[binIndex].text = "";
+            powerUpImages[binIndex].color = Color.grey;
+        }
     }
 
 }

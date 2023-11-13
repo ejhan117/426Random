@@ -5,9 +5,9 @@ using UnityEngine;
 public class SplitBall : PowerUp
 {
     // Start is called before the first frame update
-    void Start()
+    public SplitBall() : base("Split Ball", 10.0f)
     {
-        
+
     }
 
     // Update is called once per frame

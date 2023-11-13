@@ -5,17 +5,10 @@ using UnityEngine;
 public class LightningBall : PowerUp
 {
     public float speedMultiplier = 1.5f;
-    // Start is called before the first frame update
-    void Start()
+    
+    public LightningBall() : base("Fast Ball", 10.0f)
     {
-        powerName = "Lightning Ball";
-        duration = 10.0f;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public override void Activate(Player player)
