@@ -21,6 +21,9 @@ public class Player : Paddle
     public bool readySplit = false;
     public Player otherPlayer;
 
+    //Sound Map - TO BE IMPLEMENTED
+    // public Dictionary<string, AudioSource> soundEffects;
+    public AudioSource soundEffectSnail;
 
     private int numSizeIncreases = 0;
     private const int numBins = 3;
@@ -42,6 +45,7 @@ public class Player : Paddle
     private int numSizeDecreases = 0;
     private void Start()
     {
+
         StartCoroutine(GenerateRandomPowerUp());
         UpdateScoreboard();
         GameObject textObject;
@@ -270,6 +274,13 @@ public class Player : Paddle
     public void SizeDecrease()
     {
         numSizeDecreases++;
+    }
+
+    public void PlaySoundEffect(string powerName)
+    {
+      if(powerName == "Slow Paddle"){
+        soundEffectSnail.Play();
+      }
     }
 
 }
