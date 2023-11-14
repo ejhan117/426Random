@@ -19,6 +19,7 @@ public class Ball : MonoBehaviour
 
     public bool isClone = false;
 
+    public TextMeshProUGUI countdownText;
 
     // Start is called before the first frame update
     void Start()
@@ -42,10 +43,19 @@ public class Ball : MonoBehaviour
 
     IEnumerator StartAfterDelay()
     {
-        yield return new WaitForSeconds(1.0f);
+        countdownText.gameObject.SetActive(true);
+        for (int i = 3; i > 0; i--)
+        {
+            countdownText.text = i.ToString();
+            yield return new WaitForSeconds(1.0f);
+        }
+        countdownText.text = "GO!";
+        yield return new WaitForSeconds(1.0f); // Wait an additional second after displaying "GO!"
+        countdownText.gameObject.SetActive(false);
         speed = 9.0f;
         LaunchBall();
     }
+
     void LaunchBall()
     {
         // Randomly decide the initial direction of the ball
