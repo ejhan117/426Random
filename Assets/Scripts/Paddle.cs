@@ -1,13 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class Paddle : MonoBehaviour
+public class Paddle : MonoBehaviour
 {
     public new Rigidbody2D rigidbody { get; private set; }
 
     public float speed = 7f;
 
-    public bool useDynamicBounce = false;
+    // Define a flag to indicate reversed controls
+    private bool reversedControls = false;
 
     private void Awake()
     {
@@ -20,28 +23,49 @@ public abstract class Paddle : MonoBehaviour
         rigidbody.position = new Vector2(rigidbody.position.x, 0f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void ReverseControls()
     {
-        if (useDynamicBounce && collision.gameObject.CompareTag("Ball"))
-        {
-            //Rigidbody2D ball = collision.rigidbody;
-            //Collider2D paddle = collision.otherCollider;
+        // Reverse the direction of movement
+        speed *= -1;
 
-            //// Gather information about the collision
-            //Vector2 ballDirection = ball.velocity.normalized;
-            //Vector2 contactDistance = ball.transform.position - paddle.bounds.center;
-            //Vector2 surfaceNormal = collision.GetContact(0).normal;
-            //Vector3 rotationAxis = Vector3.Cross(Vector3.up, surfaceNormal);
-
-            //// Rotate the direction of the ball based on the contact distance
-            //// to make the gameplay more dynamic and interesting
-            //float maxBounceAngle = 75f;
-            //float bounceAngle = (contactDistance.y / paddle.bounds.size.y) * maxBounceAngle;
-            //ballDirection = Quaternion.AngleAxis(bounceAngle, rotationAxis) * ballDirection;
-
-            //// Re-apply the new direction to the ball
-            //ball.velocity = ballDirection * ball.velocity.magnitude;
-        }
+        // Toggle the reversedControls flag
+        reversedControls = !reversedControls;
     }
 
+    public void ApplyShockwave()
+    {
+        // Add code to apply the shockwave effect or disable the paddle as needed
+        // For example, temporarily disable the paddle's movement
+        StartCoroutine(DisablePaddleForSeconds(2f)); // Disable for 2 seconds (adjust as needed)
+    }
+
+    private IEnumerator DisablePaddleForSeconds(float duration)
+    {
+        // Disable the paddle's movement
+        speed = 0f;
+
+        // Wait for the specified duration
+        yield return new WaitForSeconds(duration);
+
+        // Re-enable the paddle's movement
+        speed = 7f; // Reset to the default speed (adjust if needed)
+    }
+
+    private void FixedUpdate()
+    {
+        // Check if controls are reversed
+        float verticalInput = reversedControls ? -Input.GetAxis("Vertical") : Input.GetAxis("Vertical");
+
+        // Move the paddle
+        rigidbody.velocity = new Vector2(0f, verticalInput * speed);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            // Handle ball collision if needed
+        }
+    }
 }
+
