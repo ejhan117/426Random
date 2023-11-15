@@ -853,7 +853,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 512570760}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9e34813ce9182aa46ba66eb6850ff5cb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1677,7 +1677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -191.9, y: -143}
+  m_AnchoredPosition: {x: -191.90002, y: -143}
   m_SizeDelta: {x: -1097.5674, y: -520.7581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724234650
@@ -2526,7 +2526,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1210760267}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9e34813ce9182aa46ba66eb6850ff5cb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3487,7 +3487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 5.5999823}
+  m_AnchoredPosition: {x: 0, y: 5.5999823}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548367666

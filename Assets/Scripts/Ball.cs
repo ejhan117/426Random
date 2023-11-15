@@ -21,6 +21,19 @@ public class Ball : MonoBehaviour
 
     public TextMeshProUGUI countdownText;
 
+    //For CurveBall
+    private bool isCurveActive = false;
+    private float curveTimer = 0f;
+    private float curveDuration = 10f; // Duration of the curve effect
+    private float curveStrength = 1f;
+
+    //For ZigZag
+    private bool isZigZagActive = false;
+    private float zigZagTimer = 0f;
+    private float zigZagDuration = 10f; // Duration of the zigzag effect
+    private float zigZagChangeInterval = 0.25f; // Time interval to change direction
+    private float nextZigZagChangeTime = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,35 +128,35 @@ public class Ball : MonoBehaviour
         // If the ball hits the Left or Right Wall , reset ball and give point
         if (col.gameObject.name == "Left Wall")
         {
-            pTwo.Score();
-            pOne.AddPowerUp();
-            pOne.UpdatePowerUpUI();
-            PLayScoreSound();
-            if (!isClone)
-            {
-                ResetBall();
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-                Destroy(this.gameObject, 2.0f);
-            }
+                pTwo.Score();
+                pOne.AddPowerUp();
+                pOne.UpdatePowerUpUI();
+                PLayScoreSound();
+                if (!isClone)
+                {
+                    ResetBall();
+                }
+                else
+                {
+                    rb.velocity = Vector2.zero;
+                    Destroy(this.gameObject, 2.0f);
+                }
         }
         else if(col.gameObject.name == "Right Wall")
         {
-            pOne.Score();
-            pTwo.AddPowerUp();
-            pTwo.UpdatePowerUpUI();
-            PLayScoreSound();
-            if (!isClone)
-            {
-                ResetBall();
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-                Destroy(this.gameObject, 2.0f);
-            }
+                pOne.Score();
+                pTwo.AddPowerUp();
+                pTwo.UpdatePowerUpUI();
+                PLayScoreSound();
+                if (!isClone)
+                {
+                    ResetBall();
+                }
+                else
+                {
+                    rb.velocity = Vector2.zero;
+                    Destroy(this.gameObject, 2.0f);
+                }
         }
     }
 
@@ -161,6 +174,43 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isCurveActive)
+        {
+            curveTimer -= Time.deltaTime;
+            if (curveTimer <= 0)
+            {
+                StopCurveEffect();
+            }
+
+            ApplyCurve();
+        }
+        rb.velocity = direction * speed;
+
+        if (pOne.isMagnetActive)
+        {
+            AdjustDirectionTowardsPaddle(pOne.gameObject);
+        }
+
+        if (pTwo.isMagnetActive)
+        {
+            AdjustDirectionTowardsPaddle(pTwo.gameObject);
+        }
+
+        if (isZigZagActive)
+        {
+            zigZagTimer -= Time.deltaTime;
+            if (zigZagTimer <= 0)
+            {
+                StopZigZagEffect();
+            }
+
+            if (Time.time >= nextZigZagChangeTime)
+            {
+                nextZigZagChangeTime = Time.time + zigZagChangeInterval;
+                ZigZagMovement();
+            }
+        }
+
         rb.velocity = direction * speed;
     }
 
@@ -207,6 +257,55 @@ public class Ball : MonoBehaviour
     public void UpdateSpeed()
     {
         rb.velocity = direction * speed;
+    }
+    public void StartCurveEffect()
+    {
+        isCurveActive = true;
+        curveTimer = curveDuration;
+    }
+
+    public void StopCurveEffect()
+    {
+        isCurveActive = false;
+    }
+    private void ApplyCurve()
+    {
+        if (!isCurveActive) return;
+
+        // Apply a simple sine wave based curve
+        float curveAmount = Mathf.Sin(Time.time * curveStrength);
+        direction.y += curveAmount * Time.deltaTime;
+        direction.Normalize();
+    }
+    private void AdjustDirectionTowardsPaddle(GameObject paddle)
+    {
+        float distance = Vector2.Distance(paddle.transform.position, transform.position);
+        float magnetRange = 7.5f; // Distance within which the magnet effect is active
+
+        if (distance < magnetRange)
+        {
+            Vector2 directionToPaddle = (paddle.transform.position - transform.position).normalized;
+            direction = Vector2.Lerp(direction, directionToPaddle, Time.deltaTime * 2f).normalized; // Adjust the lerp rate as needed
+            rb.velocity = direction * speed;
+        }
+    }
+    public void StartZigZagEffect()
+    {
+        isZigZagActive = true;
+        zigZagTimer = zigZagDuration;
+        nextZigZagChangeTime = Time.time + zigZagChangeInterval;
+    }
+
+    public void StopZigZagEffect()
+    {
+        isZigZagActive = false;
+    }
+    private void ZigZagMovement()
+    {
+        if (!isZigZagActive) return;
+
+        // Invert the y direction to create a zigzag effect
+        direction.y = -direction.y;
     }
 
 }

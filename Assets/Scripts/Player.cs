@@ -29,6 +29,8 @@ public class Player : Paddle
     public Image[] powerUpImages = new Image[numBins];
     public TMP_Text[] powerUpNames = new TMP_Text[numBins];
 
+    public bool isMagnetActive = false;
+
     private List<System.Type> availablePowerUps = new List<System.Type>
     {
         typeof(ExpandPaddle),
@@ -36,7 +38,11 @@ public class Player : Paddle
         typeof(SplitBall),
         typeof(ShrinkPaddle),
         typeof(SlowPaddle),
-        typeof(GhostPaddle)
+        typeof(GhostPaddle),
+        typeof(CurveBall),
+        typeof(MagnetPaddle),
+        typeof(TimeWarp),
+        typeof(ZigZagBall)
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
