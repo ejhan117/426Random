@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShrinkPaddle : PowerUp
 {
-  private float sizeDecrease = 2.0f; // or whatever value you want
+  private float sizeDecrease = 1.0f; // or whatever value you want
 
     public ShrinkPaddle() : base("Shrink", 5.0f)
     {
@@ -13,12 +13,12 @@ public class ShrinkPaddle : PowerUp
 
   public override void Activate(Player player)
   {
-      player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y / sizeDecrease, player.otherPlayer.transform.localScale.z);
-      player.otherPlayer.SizeDecrease();
+        player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y - sizeDecrease, player.otherPlayer.transform.localScale.z);
+        player.otherPlayer.SizeDecrease();
   }
 
   public override void Deactivate(Player player)
   {
-    player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y * sizeDecrease, player.otherPlayer.transform.localScale.z);
+        player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y + sizeDecrease, player.otherPlayer.transform.localScale.z);
   }
 }

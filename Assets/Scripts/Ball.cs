@@ -171,7 +171,6 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    rb.velocity = Vector2.zero;
                     Destroy(this.gameObject, 2.0f);
                 }
         }
@@ -187,7 +186,6 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    rb.velocity = Vector2.zero;
                     Destroy(this.gameObject, 2.0f);
                 }
         }
