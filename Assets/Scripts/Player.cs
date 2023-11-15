@@ -40,7 +40,6 @@ public class Player : Paddle
         typeof(SlowPaddle),
         typeof(GhostPaddle),
         typeof(CurveBall),
-        typeof(MagnetPaddle),
         typeof(TimeWarp),
         typeof(ZigZagBall)
         //Add More Powerups Here
