@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightningBall : PowerUp
 {
-    public float speedMultiplier = 1.5f;
+    public float speedMultiplier = 2.1f;
     
     public LightningBall() : base("Fast Ball", 10.0f)
     {
