@@ -57,16 +57,16 @@ public class Ball : MonoBehaviour
     IEnumerator StartAfterDelay()
     {
         countdownText.gameObject.SetActive(true);
-        for (int i = 3; i > 0; i--)
+        for (int i = 2; i > 0; i--)
         {
             countdownText.text = i.ToString();
             yield return new WaitForSeconds(1.0f);
         }
         countdownText.text = "GO!";
-        yield return new WaitForSeconds(1.0f); // Wait an additional second after displaying "GO!"
-        countdownText.gameObject.SetActive(false);
         speed = 9.0f;
         LaunchBall();
+        yield return new WaitForSeconds(1.0f); // Wait an additional second after displaying "GO!"
+        countdownText.gameObject.SetActive(false);
     }
 
     void LaunchBall()
