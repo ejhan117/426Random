@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HomingBall : PowerUp
 {
-    public HomingBall(): base("Homing Ball", 5f)
+    public HomingBall(): base("Magnet", 5f)
     {
 
     }
