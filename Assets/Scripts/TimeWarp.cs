@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class TimeWarp : PowerUp
 {
-    private float originalTimeScale = 1.0f;
+    // Keep track of the number of active time warps
+    private static int activeTimeWarps = 0;
     private float slowTimeScale = 0.5f; // Half the normal speed
-    private float originalPlayerSpeed;
-    private float increasedPlayerSpeedFactor = 3.0f; // Factor to increase the player's speed
 
     public TimeWarp() : base("Time Warp", 3.0f) // 10 seconds duration
     {
@@ -14,19 +13,21 @@ public class TimeWarp : PowerUp
 
     public override void Activate(Player player)
     {
-        // Slow down time
-        originalTimeScale = Time.timeScale;
-        Time.timeScale = slowTimeScale;
-
-        // Increase the player's paddle speed to compensate
-        originalPlayerSpeed = player.speed;
-        player.speed *= increasedPlayerSpeedFactor;
+        activeTimeWarps++;
+        if (activeTimeWarps == 1) // Only slow down time once
+        {
+            // Slow down everything
+            Time.timeScale = slowTimeScale;
+        }
     }
 
     public override void Deactivate(Player player)
     {
-        // Revert time scale and player's speed
-        Time.timeScale = originalTimeScale;
-        player.speed = originalPlayerSpeed;
+        activeTimeWarps--;
+        if (activeTimeWarps == 0) // Only reset time when the last warp ends
+        {
+            // Revert time scale
+            Time.timeScale = 1.0f;
+        }
     }
 }

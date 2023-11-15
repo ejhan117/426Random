@@ -25,6 +25,8 @@ public class Ball : MonoBehaviour
 
     public TextMeshProUGUI countdownText;
 
+    public bool hasScored = false; // Flag to check if the ball has already scored
+
     //For CurveBall
     private bool isCurveActive = false;
     private float curveTimer = 0f;
@@ -161,33 +163,35 @@ public class Ball : MonoBehaviour
         // If the ball hits the Left or Right Wall , reset ball and give point
         if (col.gameObject.name == "Left Wall")
         {
-                pTwo.Score();
-                pOne.AddPowerUp();
-                pOne.UpdatePowerUpUI();
-                PLayScoreSound();
-                if (!isClone)
-                {
-                    ResetBall();
-                }
-                else
-                {
-                    Destroy(this.gameObject, 2.0f);
-                }
+            hasScored = true;
+            pTwo.Score();
+            pOne.AddPowerUp();
+            pOne.UpdatePowerUpUI();
+            PLayScoreSound();
+            if (!isClone)
+            {
+                ResetBall();
+            }
+            else
+            {
+                Destroy(this.gameObject, 2.0f);
+            }
         }
         else if(col.gameObject.name == "Right Wall")
         {
-                pOne.Score();
-                pTwo.AddPowerUp();
-                pTwo.UpdatePowerUpUI();
-                PLayScoreSound();
-                if (!isClone)
-                {
-                    ResetBall();
-                }
-                else
-                {
-                    Destroy(this.gameObject, 2.0f);
-                }
+            hasScored = true;
+            pOne.Score();
+            pTwo.AddPowerUp();
+            pTwo.UpdatePowerUpUI();
+            PLayScoreSound();
+            if (!isClone)
+            {
+                ResetBall();
+            }
+            else
+            {
+                Destroy(this.gameObject, 2.0f);
+            }
         }
     }
 
