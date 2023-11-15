@@ -17,6 +17,10 @@ public class Ball : MonoBehaviour
     public AudioSource scoreAudioSource;
     public AudioClip scoreSound;
 
+    Coroutine homingProcess;
+    int homingPlayer;
+    GameObject homingPlayerPaddle;
+
     public bool isClone = false;
 
     public TextMeshProUGUI countdownText;
@@ -85,6 +89,11 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (homingProcess != null)
+        {
+            stopHoming();
+        }
+
         // If the ball hits the top or bottom wall, invert its y-direction
         if (col.gameObject.name == "Top Wall" || col.gameObject.name == "Bottom Wall")
         {
@@ -163,6 +172,11 @@ public class Ball : MonoBehaviour
     // Call this method when a goal is scored to reset the ball
     public void ResetBall()
     {
+        if (homingProcess != null)
+        {
+            stopHoming();
+        }
+
         //TODO: Check if ball is a new ball (From the power up), if so, delete instead of starting coroutine
         transform.position = Vector2.zero;
         speed = 0.0f;
@@ -308,4 +322,39 @@ public class Ball : MonoBehaviour
         direction.y = -direction.y;
     }
 
+    public void startHoming(Player player) {
+        if (player.playerNum == Player.PlayerNum.Player1)
+        {
+            homingPlayerPaddle = GameObject.Find("PlayerOne");
+        }
+        else
+        {
+            homingPlayerPaddle = GameObject.Find("PlayerTwo");
+        }
+        homingProcess = StartCoroutine(homingProcedure());
+    }
+
+    public void stopHoming()
+    {
+        StopCoroutine(homingProcess);
+    }
+
+    IEnumerator homingProcedure() 
+    {
+        if (transform.position.x >= 7 || transform.position.x <= -7)
+        {
+            stopHoming();
+        }
+
+        while (true)
+        {
+            Vector2 directionToPlayer = homingPlayerPaddle.transform.position - transform.position;
+            directionToPlayer.Normalize();
+            direction = directionToPlayer;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }   
+
 }
+

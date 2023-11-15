@@ -44,7 +44,8 @@ public class Player : Paddle
         typeof(GhostPaddle),
         typeof(CurveBall),
         typeof(TimeWarp),
-        typeof(ZigZagBall)
+        typeof(ZigZagBall),
+        typeof(HomingBall)
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
