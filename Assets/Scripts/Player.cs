@@ -47,6 +47,7 @@ public class Player : Paddle
         typeof(ZigZagBall),
         typeof(HomingBall),
         typeof(InvisiBall),
+        typeof(HorizontalWallTrap),
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
