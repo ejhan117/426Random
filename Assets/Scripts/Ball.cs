@@ -37,6 +37,9 @@ public class Ball : MonoBehaviour
     private float zigZagDuration = 10f; // Duration of the zigzag effect
     private float zigZagChangeInterval = 0.25f; // Time interval to change direction
     private float nextZigZagChangeTime = 0f;
+    public bool isInvisiBall = false;
+
+    Coroutine runningInvisiballEffect = null;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +90,22 @@ public class Ball : MonoBehaviour
         rb.velocity = direction * speed;
     }
 
+    public void setIsInvisiBall(bool isInvisiBall)
+    {
+        this.isInvisiBall = isInvisiBall;
+        if (isInvisiBall)
+        {
+            runningInvisiballEffect = StartCoroutine(InvisiBallEffect());
+
+        }
+        else
+        {
+            StopCoroutine(runningInvisiballEffect);
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (homingProcess != null)
@@ -105,6 +124,11 @@ public class Ball : MonoBehaviour
         // If the ball hits a paddle, invert its x-direction
         if (col.gameObject.name == "PlayerOne" || col.gameObject.name == "PlayerTwo")
         {
+            if (runningInvisiballEffect != null)
+            {
+                setIsInvisiBall(false);
+            }
+
             if (col.gameObject.name == "PlayerOne")
             {
                 if (direction.x > 0)
@@ -183,6 +207,12 @@ public class Ball : MonoBehaviour
         normalSpeed = 9.0f;
         GetComponent<Renderer>().material.color = Color.white;
         StartCoroutine(StartAfterDelay());
+        if (runningInvisiballEffect != null)
+        {
+            setIsInvisiBall(false);
+        }
+
+
     }
 
     // Update is called once per frame
@@ -355,6 +385,29 @@ public class Ball : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }   
+
+    IEnumerator InvisiBallEffect()
+    {
+        while (true)
+        {
+
+            this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0f);
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(0.5f);
+
+            this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            // this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0f);
+            // gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
+            // yield return new WaitForSeconds(1f);
+        }
+
+    }
 
 }
 
