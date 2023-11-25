@@ -171,5 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2398c53498d39ce438761403acb6f4fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalSpeed: 9
+  speed: 9
   pOne: {fileID: 7621390953062417108, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
   pTwo: {fileID: 3625036168895046105, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+  scoreAudioSource: {fileID: 0}
+  scoreSound: {fileID: 0}
+  isClone: 0
+  isInvisiBall: 0
