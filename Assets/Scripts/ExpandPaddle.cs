@@ -6,7 +6,7 @@ public class ExpandPaddle : PowerUp
 {
     private float sizeIncrease = 2.0f; // or whatever value you want
 
-    public ExpandPaddle() : base("Wide Paddle", 10.0f)
+    public ExpandPaddle() : base("Stretch", 10.0f)
     {
 
     }

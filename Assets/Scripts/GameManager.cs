@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text gameOver;
     public int maxScore = 10;
 
+    public GameObject horizontalWallPrefab;
+
     public Image fadeImage; // UI Image to overlay
     public float fadeSpeed = 0.8f; // Speed of the fade
     // Start is called before the first frame update
@@ -50,6 +52,34 @@ public class GameManager : MonoBehaviour
         //}
         //TODO: Make a better end condition than just score since it gets reached so easily?
     }
+
+    public void spawnHorizontalWall(int playerNo)
+    {
+        GameObject wall;
+        if (playerNo == 0)
+        {
+            wall = Instantiate(horizontalWallPrefab, new Vector3(7, 0, 0), Quaternion.identity);
+            wall.name = "HorizontalWallP1";
+        }
+        else
+        {
+            wall = Instantiate(horizontalWallPrefab, new Vector3(-7, 0, 0), Quaternion.identity);
+            wall.name = "HorizontalWallP2";
+        }
+    }
+
+    public void deleteHorizontalWall(int playerNo)
+    {
+        if (playerNo == 0)
+        {
+            Destroy(GameObject.Find("HorizontalWallP1"));
+        }
+        else
+        {
+            Destroy(GameObject.Find("HorizontalWallP2"));
+        }
+    }
+
 
     public void GameOver(int winnerNum)
     {

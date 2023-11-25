@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightningBall : PowerUp
 {
-    public float speedMultiplier = 1.5f;
+    public float speedMultiplier = 2.1f;
     
     public LightningBall() : base("Fast Ball", 10.0f)
     {
@@ -45,6 +45,11 @@ public class LightningBall : PowerUp
             Ball ballScript = ball.GetComponent<Ball>();
             if (ballScript != null)
             {
+                if(ballScript.speed <= 0.0f)
+                {
+                    ballScript.GetComponent<Renderer>().material.color = Color.white;
+                    return;
+                }
                 ballScript.speed /= speedMultiplier;
                 if(ballScript.speed < 9.0f)
                 {

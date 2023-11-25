@@ -21,6 +21,9 @@ public class Player : Paddle
     public bool readySplit = false;
     public Player otherPlayer;
 
+    //Sound Map - TO BE IMPLEMENTED
+    // public Dictionary<string, AudioSource> soundEffects;
+    public AudioSource soundEffectSnail;
 
     private int numSizeIncreases = 0;
     private const int numBins = 3;
@@ -28,6 +31,8 @@ public class Player : Paddle
 
     public Image[] powerUpImages = new Image[numBins];
     public TMP_Text[] powerUpNames = new TMP_Text[numBins];
+
+    public bool isMagnetActive = false;
 
     private List<System.Type> availablePowerUps = new List<System.Type>
     {
@@ -37,12 +42,18 @@ public class Player : Paddle
         typeof(ShrinkPaddle),
         typeof(SlowPaddle),
         typeof(GhostPaddle),
-        typeof(InvisiBall)
+        typeof(CurveBall),
+        typeof(TimeWarp),
+        typeof(ZigZagBall),
+        typeof(HomingBall),
+        typeof(InvisiBall),
+        typeof(HorizontalWallTrap),
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
     private void Start()
     {
+
         StartCoroutine(GenerateRandomPowerUp());
         UpdateScoreboard();
         GameObject textObject;
@@ -197,19 +208,43 @@ public class Player : Paddle
 
     public void AddPowerUp()
     {
-        int randomIndex = UnityEngine.Random.Range(0, availablePowerUps.Count);
-        System.Type selectedType = availablePowerUps[randomIndex];
+        //int randomIndex = UnityEngine.Random.Range(0, availablePowerUps.Count);
+        //System.Type selectedType = availablePowerUps[randomIndex];
 
-        // Use reflection to create an instance of the selected powerup
-        PowerUp newPower = (PowerUp)Activator.CreateInstance(selectedType);
-        for (int i = 0; i < numBins; i++)
+        //// Use reflection to create an instance of the selected powerup
+        //PowerUp newPower = (PowerUp)Activator.CreateInstance(selectedType);
+        //for (int i = 0; i < numBins; i++)
+        //{
+        //    if (powerUpBins[i] == null)
+        //    {
+        //        powerUpBins[i] = newPower;
+        //        break;
+        //    }
+
+        //}
+        PowerUp newPower;
+        bool isUnique;
+        int randomIndex;
+        System.Type selectedType;
+
+        do
+        {
+            randomIndex = UnityEngine.Random.Range(0, availablePowerUps.Count);
+            selectedType = availablePowerUps[randomIndex];
+
+            newPower = (PowerUp)Activator.CreateInstance(selectedType);
+
+            isUnique = !IsPowerUpTypeInBins(newPower.GetType());
+        }
+        while (!isUnique);
+
+        for(int i = 0; i < numBins; i++)
         {
             if (powerUpBins[i] == null)
             {
                 powerUpBins[i] = newPower;
                 break;
             }
-
         }
     }
     public void AddSplitBallPowerUp()
@@ -271,6 +306,25 @@ public class Player : Paddle
     public void SizeDecrease()
     {
         numSizeDecreases++;
+    }
+
+    public void PlaySoundEffect(string powerName)
+    {
+      if(powerName == "Slow Paddle"){
+        soundEffectSnail.Play();
+      }
+    }
+
+    private bool IsPowerUpTypeInBins(System.Type powerUpType)
+    {
+        foreach (var bin in powerUpBins)
+        {
+            if (bin != null && bin.GetType() == powerUpType)
+            {
+                return true; // Found an existing instance of the same type
+            }
+        }
+        return false; // No existing instance found
     }
 
 }

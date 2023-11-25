@@ -9,6 +9,9 @@ public abstract class Paddle : MonoBehaviour
 
     public bool useDynamicBounce = false;
 
+    // Testing for Tristan
+    public GameObject scorePanelIcon;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
