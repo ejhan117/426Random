@@ -13,12 +13,12 @@ public class ShrinkPaddle : PowerUp
 
   public override void Activate(Player player)
   {
-        player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y - sizeDecrease, player.otherPlayer.transform.localScale.z);
+        player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y - (player.transform.localScale.y / 2), player.otherPlayer.transform.localScale.z);
         player.otherPlayer.SizeDecrease();
   }
 
   public override void Deactivate(Player player)
   {
-        player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y + sizeDecrease, player.otherPlayer.transform.localScale.z);
+        player.otherPlayer.transform.localScale = new Vector3(player.otherPlayer.transform.localScale.x, player.otherPlayer.transform.localScale.y, player.otherPlayer.transform.localScale.z);
   }
 }
