@@ -371,7 +371,7 @@ public class Ball : MonoBehaviour
         StopCoroutine(homingProcess);
     }
 
-    IEnumerator homingProcedure() 
+    IEnumerator homingProcedure()
     {
         if (transform.position.x >= 7 || transform.position.x <= -7)
         {
@@ -386,7 +386,7 @@ public class Ball : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
-    }   
+    }
 
     IEnumerator InvisiBallEffect()
     {
@@ -412,4 +412,3 @@ public class Ball : MonoBehaviour
     }
 
 }
-

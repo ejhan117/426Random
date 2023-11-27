@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightningBall : PowerUp
 {
     public float speedMultiplier = 2.1f;
-    
+
     public LightningBall() : base("Fast Ball", 10.0f)
     {
 
@@ -25,7 +25,7 @@ public class LightningBall : PowerUp
                 ballScript.speed *= speedMultiplier;
             }
             ballScript.UpdateSpeed();
-            ballScript.GetComponent<Renderer>().material.color = Color.yellow;
+            ballScript.GetComponent<Renderer>().material.color = Color.red;
         }
         //Ball ballInstance = GameObject.FindObjectOfType<Ball>();  // Find the Ball instance in the scene
         //if (ballInstance != null)
@@ -39,6 +39,7 @@ public class LightningBall : PowerUp
         // Find all balls in the scene
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
 
+
         // Apply the speed power-up to each ball
         foreach (GameObject ball in balls)
         {
@@ -47,7 +48,7 @@ public class LightningBall : PowerUp
             {
                 if(ballScript.speed <= 0.0f)
                 {
-                    ballScript.GetComponent<Renderer>().material.color = Color.white;
+                    ballScript.GetComponent<Renderer>().material.color = Color.yellow;
                     return;
                 }
                 ballScript.speed /= speedMultiplier;

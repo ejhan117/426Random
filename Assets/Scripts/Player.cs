@@ -36,18 +36,18 @@ public class Player : Paddle
 
     private List<System.Type> availablePowerUps = new List<System.Type>
     {
-        typeof(ExpandPaddle),
+        //typeof(ExpandPaddle),
         typeof(LightningBall),
-        typeof(SplitBall),
-        typeof(ShrinkPaddle),
-        typeof(SlowPaddle),
-        typeof(GhostPaddle),
-        typeof(CurveBall),
-        typeof(TimeWarp),
-        typeof(ZigZagBall),
-        typeof(HomingBall),
-        typeof(InvisiBall),
-        typeof(HorizontalWallTrap),
+        // typeof(SplitBall),
+        // typeof(ShrinkPaddle),
+        // typeof(SlowPaddle),
+        // typeof(GhostPaddle),
+        // typeof(CurveBall),
+        // typeof(TimeWarp),
+        // typeof(ZigZagBall),
+        // typeof(HomingBall),
+        // typeof(InvisiBall),
+        // typeof(HorizontalWallTrap),
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
