@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Ball : MonoBehaviour
 {
@@ -100,14 +101,20 @@ public class Ball : MonoBehaviour
         this.isInvisiBall = isInvisiBall;
         if (isInvisiBall)
         {
-            runningInvisiballEffect = StartCoroutine(InvisiBallEffect());
-
+            //runningInvisiballEffect = StartCoroutine(InvisiBallEffect());
+            this.GetComponent<Renderer>().enabled = false;   
+            this.GetComponentInChildren<TrailRenderer>().enabled = false;
+            this.GetComponentInChildren<Light2D>().enabled = false;
         }
         else
         {
-            StopCoroutine(runningInvisiballEffect);
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
+            //StopCoroutine(runningInvisiballEffect);
+            //gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            //this.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
+            this.GetComponent<Renderer>().enabled = true;
+            this.GetComponentInChildren<TrailRenderer>().enabled = true;
+            this.GetComponentInChildren<Light2D>().enabled = true;
+
         }
     }
 
@@ -124,7 +131,7 @@ public class Ball : MonoBehaviour
             direction.y = -direction.y;
             rb.velocity = direction * speed;
             audioSource.Play();
-            collisionEffect.transform.position = col.contacts[0].point;
+                        collisionEffect.transform.position = col.contacts[0].point;
             collisionEffect.Play();
         }
 
