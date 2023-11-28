@@ -46,6 +46,8 @@ public class Ball : MonoBehaviour
 
     public ParticleSystem collisionEffect;
 
+    public CameraShake cameraShake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -320,7 +322,8 @@ public class Ball : MonoBehaviour
     }
 
     void PLayScoreSound() {
-        scoreAudioSource.PlayOneShot(scoreSound);
+        scoreAudioSource.Play();
+        cameraShake.TriggerShake();
     }
 
     public void Split(int splitCount)
