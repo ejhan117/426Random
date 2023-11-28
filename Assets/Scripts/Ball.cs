@@ -46,6 +46,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        zigZagChangeInterval = Random.Range(0.2f, 0.7f);
         Debug.Log("Start called on instance: " + this);
         rb = gameObject.GetComponent<Rigidbody2D>();
         if(rb == null)
@@ -264,6 +265,7 @@ public class Ball : MonoBehaviour
 
             if (Time.time >= nextZigZagChangeTime)
             {
+                zigZagChangeInterval = Random.Range(0.2f, 0.7f);
                 nextZigZagChangeTime = Time.time + zigZagChangeInterval;
                 ZigZagMovement();
             }
