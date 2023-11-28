@@ -34,20 +34,30 @@ public class Player : Paddle
 
     public bool isMagnetActive = false;
 
+    public Player clone = null;
+    public bool isMovementRestricted = false;
+    public bool isClone = false;
+
     private List<System.Type> availablePowerUps = new List<System.Type>
     {
         typeof(ExpandPaddle),
         typeof(LightningBall),
         typeof(SplitBall),
         typeof(ShrinkPaddle),
-        typeof(SlowPaddle),
-        typeof(GhostPaddle),
+        //typeof(SlowPaddle),
+        //GHOST PADDLE IS SUPER BUGGY, NEEDS FIXING
+        //typeof(GhostPaddle), 
         typeof(CurveBall),
-        typeof(TimeWarp),
+        //typeof(TimeWarp),
         typeof(ZigZagBall),
         typeof(HomingBall),
         typeof(InvisiBall),
         typeof(HorizontalWallTrap),
+        //typeof(TwinPaddle),
+        typeof(Shield),
+        typeof(Reverse),
+        typeof(SuperSpeed),
+        typeof(QuickMove),
         //Add More Powerups Here
     };
     private int numSizeDecreases = 0;
@@ -76,6 +86,10 @@ public class Player : Paddle
         switch (playerNum)
         {
             case PlayerNum.Player2:
+                if (clone != null && clone.isMovementRestricted)
+                {
+                    break;
+                }
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
                     direction = Vector2.up;
@@ -99,6 +113,10 @@ public class Player : Paddle
 
 
             case PlayerNum.Player1:
+                if (clone != null && clone.isMovementRestricted)
+                {
+                    break;
+                }
                 if (Input.GetKey(KeyCode.W))
                 {
                     direction = Vector2.up;
@@ -113,7 +131,10 @@ public class Player : Paddle
                 }
                 break;
         }
-
+        if (isClone)
+        {
+            return;
+        }
         if(playerNum == PlayerNum.Player1)
         {
             if (Input.GetKeyDown(KeyCode.I))
@@ -208,24 +229,14 @@ public class Player : Paddle
 
     public void AddPowerUp()
     {
-        //int randomIndex = UnityEngine.Random.Range(0, availablePowerUps.Count);
-        //System.Type selectedType = availablePowerUps[randomIndex];
-
-        //// Use reflection to create an instance of the selected powerup
-        //PowerUp newPower = (PowerUp)Activator.CreateInstance(selectedType);
-        //for (int i = 0; i < numBins; i++)
-        //{
-        //    if (powerUpBins[i] == null)
-        //    {
-        //        powerUpBins[i] = newPower;
-        //        break;
-        //    }
-
-        //}
         PowerUp newPower;
         bool isUnique;
         int randomIndex;
         System.Type selectedType;
+        if (isClone)
+        {
+            return;
+        }
 
         do
         {
@@ -327,4 +338,19 @@ public class Player : Paddle
         return false; // No existing instance found
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bounds"))
+        {
+            isMovementRestricted = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bounds"))
+        {
+            isMovementRestricted = false;
+        }
+    }
 }

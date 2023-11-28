@@ -160,6 +160,18 @@ public class Ball : MonoBehaviour
 
         }
 
+        if(col.gameObject.CompareTag("Shield"))
+        {
+            Debug.Log("Hit Shield");
+            speed += 0.5f;
+            normalSpeed += 0.5f;
+            direction.x = -direction.x;
+            direction.Normalize();
+            rb.velocity = direction * speed;
+            audioSource.Play();
+            Destroy(col.gameObject);
+        }
+
         // If the ball hits the Left or Right Wall , reset ball and give point
         if (col.gameObject.name == "Left Wall")
         {
@@ -413,6 +425,11 @@ public class Ball : MonoBehaviour
             // yield return new WaitForSeconds(1f);
         }
 
+    }
+
+    public void ReverseDirection()
+    {
+        direction = new Vector2(-direction.x, -direction.y);
     }
 
 }
