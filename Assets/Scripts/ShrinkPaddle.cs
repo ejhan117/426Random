@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShrinkPaddle : PowerUp
 {
-  private float sizeDecrease = 1.0f; // or whatever value you want
+  private float sizeDecrease = 0.5f; // or whatever value you want
 
     public ShrinkPaddle() : base("Shrink", 5.0f)
     {

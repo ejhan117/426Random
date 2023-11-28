@@ -7,7 +7,7 @@ public class HorizontalWallTrap : PowerUp
     GameObject horizontalWallPrefab;
     GameManager gm;
     // Start is called before the first frame update
-    public HorizontalWallTrap() : base("Wall Trap", 10.0f)
+    public HorizontalWallTrap() : base("Wall Trap", 3.0f)
     {
 
     }

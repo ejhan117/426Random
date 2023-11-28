@@ -439,7 +439,6 @@ public class Ball : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
-        homingProcess = null;
     }   
 
     IEnumerator InvisiBallEffect()
