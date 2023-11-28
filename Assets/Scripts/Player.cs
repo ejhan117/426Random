@@ -41,7 +41,15 @@ public class Player : Paddle
     private List<System.Type> availablePowerUps = new List<System.Type>
     {
         typeof(ExpandPaddle),
+        typeof(ExpandPaddle),
+        typeof(ExpandPaddle),
         typeof(LightningBall),
+        typeof(LightningBall),
+        typeof(LightningBall),
+        typeof(SplitBall),
+        typeof(SplitBall),
+        typeof(SplitBall),
+        typeof(SplitBall),
         typeof(SplitBall),
         typeof(ShrinkPaddle),
         //typeof(SlowPaddle),
@@ -52,14 +60,12 @@ public class Player : Paddle
         typeof(ZigZagBall),
         typeof(HomingBall),
         typeof(InvisiBall),
-        typeof(InvisiBall),
-        typeof(InvisiBall),
-        typeof(InvisiBall),
         typeof(HorizontalWallTrap),
         //typeof(TwinPaddle),
         typeof(Shield),
         typeof(Reverse),
         typeof(SuperSpeed),
+        typeof(QuickMove),
         typeof(QuickMove),
         //Add More Powerups Here
     };
