@@ -25,7 +25,7 @@ public class Ball : MonoBehaviour
 
     public TextMeshProUGUI countdownText;
 
-    public bool hasScored = false; // Flag to check if the ball has already scored
+    public bool hasScored = false;
 
     //For CurveBall
     private bool isCurveActive = false;
@@ -174,8 +174,9 @@ public class Ball : MonoBehaviour
         }
 
         // If the ball hits the Left or Right Wall , reset ball and give point
-        if (col.gameObject.name == "Left Wall")
+        /*if (col.gameObject.name == "Left Wall")
         {
+            Debug.Log("scored on left");
             hasScored = true;
             pTwo.Score();
             pOne.AddPowerUp();
@@ -192,6 +193,7 @@ public class Ball : MonoBehaviour
         }
         else if(col.gameObject.name == "Right Wall")
         {
+            Debug.Log("scored on right");
             hasScored = true;
             pOne.Score();
             pTwo.AddPowerUp();
@@ -205,12 +207,40 @@ public class Ball : MonoBehaviour
             {
                 Destroy(this.gameObject, 2.0f);
             }
+        }*/
+        if ((col.gameObject.name == "Left Wall" || col.gameObject.name == "Right Wall") && !hasScored)
+        {
+            hasScored = true; // Prevents multiple scoring
+
+            if (col.gameObject.name == "Left Wall")
+            {
+                pTwo.Score();
+                pOne.AddPowerUp();
+                pOne.UpdatePowerUpUI();
+                PLayScoreSound();
+            }
+            else if (col.gameObject.name == "Right Wall")
+            {
+                pOne.Score();
+                pTwo.AddPowerUp();
+                pTwo.UpdatePowerUpUI();
+                PLayScoreSound();
+            }
+            if (isClone)
+            {
+                Destroy(this.gameObject, 1.0f);
+            }
+            else
+            {
+                ResetBall();
+            }
         }
     }
 
     // Call this method when a goal is scored to reset the ball
     public void ResetBall()
     {
+        hasScored = false;
         if (homingProcess != null)
         {
             stopHoming();
@@ -290,6 +320,7 @@ public class Ball : MonoBehaviour
             // Get the Ball script component of the new ball
             Ball newBall = newBallObject.GetComponent<Ball>();
             newBall.isClone = true;
+            newBall.hasScored = false;
 
             Vector2 newDirection = new Vector2(direction.x, direction.y - (yIncrement * (i+1))).normalized;
             newBall.SetDirection(newDirection);
@@ -369,6 +400,10 @@ public class Ball : MonoBehaviour
     }
 
     public void startHoming(Player player) {
+        if (homingProcess != null)
+        {
+            stopHoming(); // Stop the existing coroutine if it's already running
+        }
         if (player.playerNum == Player.PlayerNum.Player1)
         {
             homingPlayerPaddle = GameObject.Find("PlayerOne");
@@ -382,7 +417,11 @@ public class Ball : MonoBehaviour
 
     public void stopHoming()
     {
-        StopCoroutine(homingProcess);
+        if (homingProcess != null) // Check that the coroutine is not null
+        {
+            StopCoroutine(homingProcess);
+            homingProcess = null; // Reset the coroutine variable
+        }
     }
 
     IEnumerator homingProcedure() 
@@ -400,6 +439,7 @@ public class Ball : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+        homingProcess = null;
     }   
 
     IEnumerator InvisiBallEffect()

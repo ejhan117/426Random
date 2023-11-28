@@ -264,8 +264,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.008350015, y: 0.01305002, z: 0}
-    m_Extent: {x: 0.63185, y: 1.4052501, z: 0}
+    m_Center: {x: 0.010850012, y: 0.009500027, z: 0}
+    m_Extent: {x: 0.62725, y: 1.3979, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -972,6 +972,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1113,6 +1114,50 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &652204201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,8 +2229,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.011399984, y: -0.002550006, z: 0}
-    m_Extent: {x: 0.6397, y: 1.37845, z: 0}
+    m_Center: {x: 0.015450001, y: -0.004600048, z: 0}
+    m_Extent: {x: 0.63665, y: 1.375, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4309,8 +4354,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0037499964, y: -0.0009999871, z: 0}
-    m_Extent: {x: 1.00195, y: 1.0076001, z: 0}
+    m_Center: {x: 0.0016999841, y: 0.0038499832, z: 0}
+    m_Extent: {x: 0.9964, y: 1.00185, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5313,10 +5358,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTwo
       objectReference: {fileID: 0}
-    - target: {fileID: 3305172379670948442, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3625036168895046105, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: scoreText
       value: 
@@ -5400,6 +5441,22 @@ PrefabInstance:
     - target: {fileID: 6347312694992175541, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379789733708779635, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.25882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379789733708779635, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1.7882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379789733708779635, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.25882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6379789733708779635, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.7882353
       objectReference: {fileID: 0}
     - target: {fileID: 7114940183260804653, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: m_Size.x
@@ -5519,10 +5576,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1229721803484781302, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2338427624165125803, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
-      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
@@ -5669,6 +5722,22 @@ PrefabInstance:
       propertyPath: powerUpImages.Array.data[2]
       value: 
       objectReference: {fileID: 929804064}
+    - target: {fileID: 8260200635780901351, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.25882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260200635780901351, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 1.7882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260200635780901351, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.25882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 8260200635780901351, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.7882353
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
     m_RemovedGameObjects: []
