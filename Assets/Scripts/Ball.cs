@@ -43,6 +43,8 @@ public class Ball : MonoBehaviour
 
     Coroutine runningInvisiballEffect = null;
 
+    public ParticleSystem collisionEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +124,8 @@ public class Ball : MonoBehaviour
             direction.y = -direction.y;
             rb.velocity = direction * speed;
             audioSource.Play();
+            collisionEffect.transform.position = col.contacts[0].point;
+            collisionEffect.Play();
         }
 
         // If the ball hits a paddle, invert its x-direction
@@ -152,6 +156,8 @@ public class Ball : MonoBehaviour
             direction.Normalize();
             rb.velocity = direction * speed;
             audioSource.Play();
+            collisionEffect.transform.position = col.contacts[0].point;
+            collisionEffect.Play();
             Player player = col.gameObject.GetComponent<Player>();
             if (player != null && player.splitBallCount > 0)
             {
@@ -170,6 +176,8 @@ public class Ball : MonoBehaviour
             direction.Normalize();
             rb.velocity = direction * speed;
             audioSource.Play();
+            collisionEffect.transform.position = col.contacts[0].point;
+            collisionEffect.Play();
             Destroy(col.gameObject);
         }
 
