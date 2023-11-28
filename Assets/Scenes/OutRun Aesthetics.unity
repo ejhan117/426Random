@@ -264,8 +264,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.002000004, y: 0.0079, z: 0}
-    m_Extent: {x: 0.6344, y: 1.4032, z: 0}
+    m_Center: {x: 0.008350015, y: 0.01305002, z: 0}
+    m_Extent: {x: 0.63185, y: 1.4052501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2184,8 +2184,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.019449979, y: 0.00024998188, z: 0}
-    m_Extent: {x: 0.62874997, y: 1.37695, z: 0}
+    m_Center: {x: 0.011399984, y: -0.002550006, z: 0}
+    m_Extent: {x: 0.6397, y: 1.37845, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3462,6 +3462,7 @@ MonoBehaviour:
   gameOver: {fileID: 149044677}
   maxScore: 10
   horizontalWallPrefab: {fileID: 6640401467314099768, guid: 3c93be5e5f60fa844b188959d780f5ea, type: 3}
+  shieldPrefab: {fileID: 4988353224550587309, guid: abe2ceb21aba1844faf4fabc01b8ca58, type: 3}
   fadeImage: {fileID: 0}
   fadeSpeed: 0.8
 --- !u!4 &1474587566
@@ -4308,8 +4309,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0027499795, y: 0.0030499697, z: 0}
-    m_Extent: {x: 1.0071499, y: 1.00325, z: 0}
+    m_Center: {x: -0.0037499964, y: -0.0009999871, z: 0}
+    m_Extent: {x: 1.00195, y: 1.0076001, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
