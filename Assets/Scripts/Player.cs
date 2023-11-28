@@ -29,7 +29,7 @@ public class Player : Paddle
     private const int numBins = 3;
     public PowerUp[] powerUpBins = new PowerUp[numBins];
 
-    public Image[] powerUpImages = new Image[numBins];
+    // public Image[] powerUpImages = new Image[numBins];
     public TMP_Text[] powerUpNames = new TMP_Text[numBins];
 
     public bool isMagnetActive = false;
@@ -294,13 +294,13 @@ public class Player : Paddle
             string powerName = powerUpBins[binIndex].powerName;
             Debug.Log(powerName);
             powerUpNames[binIndex].text = powerName;
-            powerUpImages[binIndex].color = Color.green;
+            // powerUpImages[binIndex].color = Color.green;
             // Set the image sprite based on powerUp type if you have different sprites
         }
         else
         {
             powerUpNames[binIndex].text = "";
-            powerUpImages[binIndex].color = Color.grey;
+            // powerUpImages[binIndex].color = Color.grey;
         }
     }
     public void SizeDecrease()
