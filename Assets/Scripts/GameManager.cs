@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject horizontalWallPrefab;
 
+    public GameObject shieldPrefab;
+
     public Image fadeImage; // UI Image to overlay
     public float fadeSpeed = 0.8f; // Speed of the fade
     // Start is called before the first frame update
@@ -77,6 +79,33 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(GameObject.Find("HorizontalWallP2"));
+        }
+    }
+
+    public void spawnShield(int playerNo)
+    {
+        GameObject shield;
+        if (playerNo == 0)
+        {
+            shield = Instantiate(shieldPrefab, new Vector3(-9, 0, -1), Quaternion.identity);
+            shield.name = "Shield1";
+        }
+        else
+        {
+            shield = Instantiate(shieldPrefab, new Vector3(9, 0, -1), Quaternion.identity);
+            shield.name = "Shield2";
+        }
+    }
+
+    public void deleteShield(int playerNo)
+    {
+        if (playerNo == 0)
+        {
+            Destroy(GameObject.Find("Shield1"));
+        }
+        else
+        {
+            Destroy(GameObject.Find("Shield2"));
         }
     }
 

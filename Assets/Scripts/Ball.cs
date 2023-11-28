@@ -46,6 +46,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        zigZagChangeInterval = Random.Range(0.2f, 0.7f);
         Debug.Log("Start called on instance: " + this);
         rb = gameObject.GetComponent<Rigidbody2D>();
         if(rb == null)
@@ -160,6 +161,18 @@ public class Ball : MonoBehaviour
 
         }
 
+        if(col.gameObject.CompareTag("Shield"))
+        {
+            Debug.Log("Hit Shield");
+            speed += 0.5f;
+            normalSpeed += 0.5f;
+            direction.x = -direction.x;
+            direction.Normalize();
+            rb.velocity = direction * speed;
+            audioSource.Play();
+            Destroy(col.gameObject);
+        }
+
         // If the ball hits the Left or Right Wall , reset ball and give point
         if (col.gameObject.name == "Left Wall")
         {
@@ -252,6 +265,7 @@ public class Ball : MonoBehaviour
 
             if (Time.time >= nextZigZagChangeTime)
             {
+                zigZagChangeInterval = Random.Range(0.2f, 0.7f);
                 nextZigZagChangeTime = Time.time + zigZagChangeInterval;
                 ZigZagMovement();
             }
@@ -413,6 +427,11 @@ public class Ball : MonoBehaviour
             // yield return new WaitForSeconds(1f);
         }
 
+    }
+
+    public void ReverseDirection()
+    {
+        direction = new Vector2(-direction.x, -direction.y);
     }
 
 }
