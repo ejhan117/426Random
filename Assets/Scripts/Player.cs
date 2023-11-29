@@ -426,16 +426,13 @@ public class Player : Paddle
     {
         typeof(ExpandPaddle),
         typeof(ExpandPaddle),
-        typeof(ExpandPaddle),
-        //typeof(LightningBall),
-        //typeof(LightningBall),
-        //typeof(LightningBall),
-        //typeof(SplitBall),
-        //typeof(SplitBall),
-        //typeof(SplitBall),
-        //typeof(SplitBall),
-        //typeof(SplitBall),
-        //typeof(ShrinkPaddle),
+        typeof(LightningBall),
+        typeof(LightningBall),
+        typeof(SplitBall),
+        typeof(SplitBall),
+        typeof(SplitBall),
+        typeof(SplitBall),
+        typeof(ShrinkPaddle),
 
         //typeof(SlowPaddle),
         //GHOST PADDLE IS SUPER BUGGY, NEEDS FIXING
@@ -445,10 +442,10 @@ public class Player : Paddle
 
         //typeof(TimeWarp),
 
-        //typeof(ZigZagBall),
-        //typeof(ZigZagBall),
-        //typeof(HomingBall),
-        //typeof(InvisiBall),
+        typeof(ZigZagBall),
+        typeof(ZigZagBall),
+        typeof(HomingBall),
+        typeof(InvisiBall),
         typeof(HorizontalWallTrap),
 
         //typeof(TwinPaddle),
@@ -457,7 +454,6 @@ public class Player : Paddle
         typeof(Reverse),
         typeof(Reverse),
         typeof(SuperSpeed),
-        typeof(QuickMove),
         typeof(QuickMove),
         //Add More Powerups Here
     };
