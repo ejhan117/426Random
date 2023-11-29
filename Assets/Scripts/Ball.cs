@@ -48,6 +48,9 @@ public class Ball : MonoBehaviour
 
     public CameraShake cameraShake;
 
+    public SpriteRenderer zigZagIcon;
+    public SpriteRenderer curveIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -299,18 +302,23 @@ public class Ball : MonoBehaviour
             }
 
             ApplyCurve();
+            curveIcon.enabled = true;
+        }
+        else
+        {
+            curveIcon.enabled = false;
         }
         rb.velocity = direction * speed;
 
-        if (pOne.isMagnetActive)
-        {
-            AdjustDirectionTowardsPaddle(pOne.gameObject);
-        }
+        //if (pOne.isMagnetActive)
+        //{
+        //    AdjustDirectionTowardsPaddle(pOne.gameObject);
+        //}
 
-        if (pTwo.isMagnetActive)
-        {
-            AdjustDirectionTowardsPaddle(pTwo.gameObject);
-        }
+        //if (pTwo.isMagnetActive)
+        //{
+        //    AdjustDirectionTowardsPaddle(pTwo.gameObject);
+        //}
 
         if (isZigZagActive)
         {
@@ -326,6 +334,11 @@ public class Ball : MonoBehaviour
                 nextZigZagChangeTime = Time.time + zigZagChangeInterval;
                 ZigZagMovement();
             }
+            zigZagIcon.enabled = true;
+        }
+        else
+        {
+            zigZagIcon.enabled = false;
         }
 
         rb.velocity = direction * speed;
@@ -435,10 +448,12 @@ public class Ball : MonoBehaviour
         if (player.playerNum == Player.PlayerNum.Player1)
         {
             homingPlayerPaddle = GameObject.Find("PlayerOne");
+            homingPlayer = 1;
         }
         else
         {
             homingPlayerPaddle = GameObject.Find("PlayerTwo");
+            homingPlayer = 2;
         }
         homingProcess = StartCoroutine(homingProcedure());
     }
@@ -447,6 +462,14 @@ public class Ball : MonoBehaviour
     {
         if (homingProcess != null) // Check that the coroutine is not null
         {
+            if(homingPlayer == 1)
+            {
+                pOne.isMagnetActive = false;
+            }
+            else
+            {
+                pTwo.isMagnetActive = false;
+            }
             StopCoroutine(homingProcess);
             homingProcess = null; // Reset the coroutine variable
         }
