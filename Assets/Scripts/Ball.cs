@@ -310,7 +310,14 @@ public class Ball : MonoBehaviour
             }
 
             ApplyCurve();
-            curveIcon.enabled = true;
+            if (!isInvisiBall)
+            {
+                curveIcon.enabled = true;
+            }
+            else
+            {
+                curveIcon.enabled = false;
+            }
         }
         else
         {
@@ -342,7 +349,14 @@ public class Ball : MonoBehaviour
                 nextZigZagChangeTime = Time.time + zigZagChangeInterval;
                 ZigZagMovement();
             }
-            zigZagIcon.enabled = true;
+            if (!isInvisiBall)
+            {
+                zigZagIcon.enabled = true;
+            }
+            else
+            {
+                zigZagIcon.enabled = false;
+            }
         }
         else
         {
