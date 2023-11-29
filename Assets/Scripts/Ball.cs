@@ -100,7 +100,7 @@ public class Ball : MonoBehaviour
 
     public void setIsInvisiBall(bool isInvisiBall)
     {
-        this.isInvisiBall = isInvisiBall;
+        /*this.isInvisiBall = isInvisiBall;
         if (isInvisiBall)
         {
             //runningInvisiballEffect = StartCoroutine(InvisiBallEffect());
@@ -117,7 +117,11 @@ public class Ball : MonoBehaviour
             this.GetComponentInChildren<TrailRenderer>().enabled = true;
             this.GetComponentInChildren<Light2D>().enabled = true;
 
-        }
+        }*/
+        this.isInvisiBall = isInvisiBall;
+        this.GetComponent<Renderer>().enabled = !isInvisiBall;   
+        this.GetComponentInChildren<TrailRenderer>().enabled = !isInvisiBall;
+        this.GetComponentInChildren<Light2D>().enabled = !isInvisiBall;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -140,10 +144,10 @@ public class Ball : MonoBehaviour
         // If the ball hits a paddle, invert its x-direction
         if (col.gameObject.name == "PlayerOne" || col.gameObject.name == "PlayerTwo")
         {
-            if (runningInvisiballEffect != null)
+            /*if (runningInvisiballEffect != null)
             {
                 setIsInvisiBall(false);
-            }
+            }*/
 
             if (col.gameObject.name == "PlayerOne")
             {
@@ -252,6 +256,11 @@ public class Ball : MonoBehaviour
                 ResetBall();
             }
         }
+
+        if (col.gameObject.name == "PlayerOne" || col.gameObject.name == "PlayerTwo" || col.gameObject.name == "Left Wall" || col.gameObject.name == "Right Wall")
+        {
+            setIsInvisiBall(false);
+        }
     }
 
     // Call this method when a goal is scored to reset the ball
@@ -269,10 +278,11 @@ public class Ball : MonoBehaviour
         normalSpeed = 9.0f;
         GetComponent<Renderer>().material.color = Color.white;
         StartCoroutine(StartAfterDelay());
-        if (runningInvisiballEffect != null)
+        /*if (runningInvisiballEffect != null)
         {
             setIsInvisiBall(false);
-        }
+        }*/
+        setIsInvisiBall(false);
 
 
     }
