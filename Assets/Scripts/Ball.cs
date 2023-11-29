@@ -279,7 +279,15 @@ public class Ball : MonoBehaviour
         transform.position = Vector2.zero;
         speed = 0.0f;
         normalSpeed = 9.0f;
-        GetComponent<Renderer>().material.color = Color.white;
+        GetComponent<SpriteRenderer>().material.color = Color.yellow;
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(Color.yellow, 0.0f), new GradientColorKey(Color.yellow, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+        );
+
+        // Apply the gradient to the trail renderer
+        GetComponentInChildren<TrailRenderer>().colorGradient = gradient; 
         StartCoroutine(StartAfterDelay());
         /*if (runningInvisiballEffect != null)
         {

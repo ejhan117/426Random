@@ -25,7 +25,15 @@ public class SuperSpeed : PowerUp
                 ballScript.speed *= speedMultiplier;
             }
             ballScript.UpdateSpeed();
-            ballScript.GetComponent<Renderer>().material.color = Color.yellow;
+            ballScript.GetComponent<SpriteRenderer>().material.color = Color.blue;
+            Gradient gradient = new Gradient();
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(Color.blue, 0.0f), new GradientColorKey(Color.blue, 1.0f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+            );
+
+            // Apply the gradient to the trail renderer
+            ballScript.GetComponentInChildren<TrailRenderer>().colorGradient = gradient;
         }
         //Ball ballInstance = GameObject.FindObjectOfType<Ball>();  // Find the Ball instance in the scene
         //if (ballInstance != null)
@@ -47,7 +55,15 @@ public class SuperSpeed : PowerUp
             {
                 if (ballScript.speed <= 0.0f)
                 {
-                    ballScript.GetComponent<Renderer>().material.color = Color.white;
+                    ballScript.GetComponent<SpriteRenderer>().material.color = Color.yellow;
+                    Gradient grad = new Gradient();
+                    grad.SetKeys(
+                        new GradientColorKey[] { new GradientColorKey(Color.yellow, 0.0f), new GradientColorKey(Color.yellow, 1.0f) },
+                        new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+                    );
+
+                    // Apply the gradient to the trail renderer
+                    ballScript.GetComponentInChildren<TrailRenderer>().colorGradient = grad; 
                     return;
                 }
                 ballScript.speed /= speedMultiplier;
@@ -56,7 +72,15 @@ public class SuperSpeed : PowerUp
                     ballScript.speed = 9.0f;
                 }
             }
-            ballScript.GetComponent<Renderer>().material.color = Color.white;
+            ballScript.GetComponent<SpriteRenderer>().material.color = Color.yellow;
+            Gradient gradient = new Gradient();
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(Color.yellow, 0.0f), new GradientColorKey(Color.yellow, 1.0f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+            );
+
+            // Apply the gradient to the trail renderer
+            ballScript.GetComponentInChildren<TrailRenderer>().colorGradient = gradient; 
             ballScript.UpdateSpeed();
         }
     }
