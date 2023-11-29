@@ -322,7 +322,7 @@ public class Ball : MonoBehaviour
 
             if (Time.time >= nextZigZagChangeTime)
             {
-                zigZagChangeInterval = Random.Range(0.2f, 0.7f);
+                zigZagChangeInterval = Random.Range(0.3f, 0.7f);
                 nextZigZagChangeTime = Time.time + zigZagChangeInterval;
                 ZigZagMovement();
             }

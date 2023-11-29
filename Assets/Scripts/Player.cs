@@ -406,6 +406,8 @@ public class Player : Paddle
     public bool isMovementRestricted = false;
     public bool isClone = false;
 
+    public SpriteRenderer magnet;
+
     public AudioSource soundEffectExpandPaddle;
     public AudioSource soundEffectLightningBall;
     public AudioSource soundEffectSplitBall;
@@ -440,11 +442,13 @@ public class Player : Paddle
         typeof(CurveBall),
         //typeof(TimeWarp),
         typeof(ZigZagBall),
+        typeof(ZigZagBall),
         typeof(HomingBall),
         typeof(InvisiBall),
         typeof(HorizontalWallTrap),
         //typeof(TwinPaddle),
         typeof(Shield),
+        typeof(Reverse),
         typeof(Reverse),
         typeof(SuperSpeed),
         typeof(QuickMove),
@@ -577,6 +581,15 @@ public class Player : Paddle
         {
             // Stop the paddle when no input is given
             rigidbody.velocity = Vector2.zero;
+        }
+
+        if (isMagnetActive)
+        {
+            magnet.enabled = true;
+        }
+        else
+        {
+            magnet.enabled = false;
         }
     }
 
