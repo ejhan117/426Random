@@ -18,10 +18,15 @@ public class GameManager : MonoBehaviour
 
     public Image fadeImage; // UI Image to overlay
     public float fadeSpeed = 0.8f; // Speed of the fade
+
+    private float safeDistance = 1.5f;
+    float gameAreaHeight;
     // Start is called before the first frame update
     void Start()
     {
         gameOver.enabled = false;
+        gameAreaHeight = 2f * Camera.main.orthographicSize;
+        Debug.Log(gameAreaHeight);
     }
 
     // Update is called once per frame
@@ -58,14 +63,15 @@ public class GameManager : MonoBehaviour
     public void spawnHorizontalWall(int playerNo)
     {
         GameObject wall;
+        Vector3 spawnPos = CalculateSpawnPosition(playerNo);
         if (playerNo == 0)
         {
-            wall = Instantiate(horizontalWallPrefab, new Vector3(7, 0, 0), Quaternion.identity);
+            wall = Instantiate(horizontalWallPrefab, spawnPos, Quaternion.identity);
             wall.name = "HorizontalWallP1";
         }
         else
         {
-            wall = Instantiate(horizontalWallPrefab, new Vector3(-7, 0, 0), Quaternion.identity);
+            wall = Instantiate(horizontalWallPrefab, spawnPos, Quaternion.identity);
             wall.name = "HorizontalWallP2";
         }
     }
@@ -142,4 +148,52 @@ public class GameManager : MonoBehaviour
         // Reload the scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    Vector3 CalculateSpawnPosition(int playerNo)
+    {
+        Player other;
+        if(playerNo == 0)
+        {
+            other = pTwo;
+        }
+        else
+        {
+            other = pOne;
+        }
+        float playerSize = other.GetComponent<Renderer>().bounds.size.y; // Get the player's size
+        Vector3 playerPosition = other.transform.position;
+
+        // Define the upper and lower bounds of the game area
+        float lowerBound = -gameAreaHeight / 2;
+        float upperBound = gameAreaHeight / 2;
+
+        // Calculate safe zones above and below the player
+        float safeZoneLower = playerPosition.y - playerSize / 2 - safeDistance;
+        float safeZoneUpper = playerPosition.y + playerSize / 2 + safeDistance;
+
+        // Ensure the safe zones do not exceed the game area bounds
+        safeZoneLower = Mathf.Max(safeZoneLower, lowerBound);
+        safeZoneUpper = Mathf.Min(safeZoneUpper, upperBound);
+
+        // Check if there is enough space to spawn the wall
+        if (safeZoneUpper - safeZoneLower <= 0)
+        {
+            // Not enough space to spawn the wall safely
+            return Vector3.zero;
+        }
+
+        // Randomize spawn position outside the player's area
+        float spawnY;
+        if (playerPosition.y >= 0f) // Randomly choose above or below the player
+        {
+            spawnY = safeZoneLower;
+        }
+        else
+        {
+            spawnY = safeZoneUpper;
+        }
+
+        return new Vector3(playerPosition.x, spawnY, playerPosition.z); // Assuming a 2D game on the XY plane
+    }
 }
+
