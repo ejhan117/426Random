@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MagnetPaddle : PowerUp
 {
-    public MagnetPaddle() : base("Magnet Paddle", 7.5f)
+    public MagnetPaddle() : base("Magnet Paddle", 3.0f)
     {
 
     }
