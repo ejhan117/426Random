@@ -264,8 +264,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0057500005, y: 0.007000029, z: 0}
-    m_Extent: {x: 0.63275, y: 1.4082999, z: 0}
+    m_Center: {x: 0.0036000013, y: 0.014149964, z: 0}
+    m_Extent: {x: 0.6325, y: 1.4007499, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2200,8 +2200,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.013499975, y: -0.001150012, z: 0}
-    m_Extent: {x: 0.6329, y: 1.38105, z: 0}
+    m_Center: {x: 0.02094999, y: -0.00454998, z: 0}
+    m_Extent: {x: 0.63315, y: 1.37765, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3874,8 +3874,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0032500029, y: 0.0069000125, z: 0}
-    m_Extent: {x: 1.00405, y: 0.9997, z: 0}
+    m_Center: {x: 0.006650001, y: 0.0024999976, z: 0}
+    m_Extent: {x: 1.00055, y: 1.0056, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4989,6 +4989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 3597881581857723442, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3625036168895046105, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
       propertyPath: scoreText
       value: 
@@ -5166,7 +5170,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8402820613258369806, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
-      insertIndex: -1
+      insertIndex: 0
       addedObject: {fileID: 107207283}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3072231215092505185, guid: cd619c045f6717f4d91c1d6151264ec6, type: 3}
@@ -5208,6 +5212,10 @@ PrefabInstance:
     - target: {fileID: 1229721803484781302, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1994012816564599720, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_LocalScale.x
@@ -5284,6 +5292,10 @@ PrefabInstance:
     - target: {fileID: 5196607887838115912, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 15.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524443008438841229, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7621390953062417108, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
       propertyPath: scoreText
@@ -5374,7 +5386,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4284010500710627082, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
-      insertIndex: -1
+      insertIndex: 0
       addedObject: {fileID: 993649684}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4507088299167641189, guid: a1daeab48544d434cb38952d76c462b1, type: 3}
